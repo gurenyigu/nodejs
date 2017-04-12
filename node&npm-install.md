@@ -102,3 +102,15 @@ $ npm update <packageName>
     $ npm install express --save-dev
     ```
     
+    * 卸载模块
+    
+    ```bash
+    $ npm uninstall ***
+    $ npm uninstall *** -g
+    ```
+    
+    * 清理缓存
+    
+    ```bash
+    $ npm cache clean 
+    ```
