@@ -9,3 +9,5 @@
 ---
 ### [Node与npm](https://github.com/gurenyigu/nodejs/blob/master/node%26npm-install.md)
 
+---
+### [I/O处理方式资源](https://github.com/gurenyigu/nodejs/blob/master/I-O.md)
