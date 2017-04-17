@@ -34,7 +34,7 @@ $ npm install express
 ```bash
 $ npm install experss -g
 ```
-* ### 将安装的包放在/user/local下，或者`node`的安装目录。
+* ### 将安装的包放在/usr/local下，或者`node`的安装目录。
 * ### 可以直接在命令行里使用。
 
 ## 查看安装的模块
