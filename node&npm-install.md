@@ -101,6 +101,16 @@ $ npm update <packageName>
     
     $ npm install express --save-dev
     ```
+    * 全局安装举例：
+    安装路径：/usr/local/lib/node_modules中 
+    ```bash
+    nodemon安装
+    $ sudo npm install nodemon -g 
+    $ sudo npm install nodemon --save
+    mongodb安装
+    $ sudo npm install mongodb -g
+    $ sudo npm install mongodb --save
+    ```
     
     * 卸载模块
     
