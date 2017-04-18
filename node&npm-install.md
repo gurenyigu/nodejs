@@ -105,11 +105,9 @@ $ npm update <packageName>
     安装路径：/usr/local/lib/node_modules中 
     ```bash
     nodemon安装
-    $ sudo npm install nodemon -g 
-    $ sudo npm install nodemon --save
+    $ sudo npm install nodemon -g --save
     mongodb安装
-    $ sudo npm install mongodb -g
-    $ sudo npm install mongodb --save
+    $ sudo npm install mongodb -g --save
     ```
     
     * 卸载模块
