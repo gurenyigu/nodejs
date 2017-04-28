@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Demo socket.io</title>
+  <!-- 浏览器通过引入socket.io.js即可使用socket.io 这里引用CDN来解决 -->
+  <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    /*
+        var socket = io.connect('http://localhost');
+        http://localhost 本地服务器建立连接并附值给socket 对象，如果是其他服务器建立连接则只需要将connect()参数修改为服务器地址即可
+        这里socket.io 客户端和服务器位于同一个服务器上  则简写为 var socket = io.connect(); 或者下面的写法
+          */
+    var socket = io();
+    //接收服务器发射的 news 事件
+    socket.on('news', function(data) {
+      console.log("socket.on");
+      // 将服务器发送来的消息打印在控制台
+      console.log(data);
+      $('.hello').html(data.hello);
+      // 发射 other 事件 传递一个对象
+      socket.emit('other', {
+        my: 'data'
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Welcome socket.io.</h1>
+  <h2 class="hello"></h2>
+</body>
+
+</html>

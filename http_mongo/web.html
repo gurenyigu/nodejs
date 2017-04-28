@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    a {
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-color: #785834;
+      color: red;
+      text-decoration: none;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1> 用户管理系统 </h1>
+  <form method="post" action="/url">
+    <fieldset>
+      <label> 添加用户 </label>
+      <p>姓名:</p>
+      <input type="text" name="name">
+      <p>年龄:</p>
+      <input name="age" maxlength='2'>
+      <p><button>提交添加</button></p>
+    </fieldset>
+  </form>
+
+  <form action="/delete" method="post">
+    <fieldset>
+      <label> 删除用户 </label>
+      <p>姓名:</p>
+      <input type="text" name="name" id="">
+      <p>年龄:</p>
+      <input maxlength="2" name="age" id="">
+      <p><button>提交删除</button></p>
+    </fieldset>
+  </form>
+  <!-- <a href="file://localhost:3000/info">info</a> -->
+</body>
+
+</html>

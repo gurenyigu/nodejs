@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Socket.IO chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font: 13px Helvetica, Arial;
+    }
+
+    form {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    form input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: .5%;
+    }
+
+    form button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+    /* odd : 奇数 */
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="join"></div>
+  <ul id="messages"></ul>
+  <form action="">
+    <input type="text" autocomplete='off' id="m"><button>发送</button>
+  </form>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    // 链接服务器获取对象
+    var socket = io();
+
+    // 表单submit事件处理函数 进行主动的向后端发送消息  给后端处理
+    $('form').submit(function() {
+      // 前端发送消息给服务器 参数分别为 事件名 发送的数据  匿名处理函数(对方接收到信息后的处理)
+      socket.emit('send message', $('#m').val(), function(log) {
+        console.log('已接受' + log);
+      });
+      // 打印出发送内容
+      console.log($('#m').val());
+      // 每次发送玩后清空输入框内容
+      $('#m').val('');
+      // 阻止表单默认事件
+      return false;
+    });
+
+    // 接收服务器发送的数据 并对所有人广播
+    socket.on('return message', function(msg) {
+      // 将传送来的数据内容进行显示
+      $('#messages').append($('<li>').text('wds:  ' + msg));
+    });
+
+    // 后端广播 每当新用户链接进来后 都会触发 进行 除当前链接用户以外用户的显示
+    socket.on('broadcast', function(msg) {
+      console.log(socket);
+      console.log(io);
+      $('#join').append('<p><strong>welcome to new friend.</strong></p>');
+    });
+
+    // 接收后端传送的 id 并显示
+    socket.on('id', function(key) {
+      $('#messages').append($('<li>').text('欢迎： ' + key + '加入房间'));
+    });
+  </script>
+</body>
+
+</html>

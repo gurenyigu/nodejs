@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+    .mybotton { border: 1px solid black; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+    .public {color: blue;}
+    .name {font-size: 26px;}
+    .msg {}
+    .to {color: red}
+    .self {color: green}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="join"></div>
+      <div>
+        <h3 class="num"></h3>
+      </div>
+      <ul id="messages">
+      </ul>
+      <form action="">
+        <div class="row mybotton">
+          <div class="col-md-1">msg:</div>
+          <div class="col-md-4">
+            <input id="m" autocomplete="off" /></div>
+          <div class="col-md-2">
+            My Name: <input id="name" autocomplete="off" value="user" /></div>
+          <div class="col-md-2">
+            To Name: <input id="to" autocomplete="off" value="Public" /></div>
+          <div class="col-md-3">
+            <button>Send</button></div>
+        </div>
+      </form>
+    </div>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+    var na;
+      var socket = io();
+      socket.on('name', function(name){
+        var n = $('#name').val();
+        console.log(n);
+        if(n === 'user'){
+          //console.log(name);
+          na = name.name;
+          console.log(na);
+          $('#name').val(name.name);
+        }
+      })
+      $('form').submit(function(){
+        //{msg: msg, name: name}
+        socket.emit('chat message', {msg: $('#m').val(), name: $('#name').val(), to: $('#to').val()}, function(data, err){
+          console.log(data);
+          console.log(err);
+          setTimeout(function(){
+            $('li:last-child').append('<i class="fa fa-check" aria-hidden="true"></i>');
+            return false;
+          }, 1000);
+        });
+          $('#m').val('');
+          return false;
+      });
+
+      socket.on('message', function(msg){
+        console.log(msg);
+        console.log(na);
+          if(msg.to === 'Public'){
+          $('#messages').append($('<li>').text(''));
+          $('li:last-child').append('<i class="fa fa-arrow-circle-right public fa-1x" aria-hidden="true"></i>');
+          $('li:last-child').append(' <span class=name>'+msg.name+'</b>');
+          $('li:last-child').append(' Say :  ');
+          $('li:last-child').append($('<span class=msg>').text(msg.msg));
+        } else if(na === msg.to){
+          $('#messages').append($('<li>').text(''));
+          $('li:last-child').append('<i class="fa fa-address-card fa-1x to" aria-hidden="true"></i>');
+          $('li:last-child').append(' <span class="name">'+msg.name+'</b>');
+          $('li:last-child').append('to you Say :  ');
+          $('li:last-child').append($('<span class="msg">').text(msg.msg));
+        } else if(na === msg.name){
+          $('#messages').append($('<li>').text(''));
+          $('li:last-child').append('<i class="fa fa-asterisk fa-1x self" aria-hidden="true"></i>');
+          $('li:last-child').append(' You to ');
+          $('li:last-child').append(' <span class="name">'+msg.to+'</b>');
+          $('li:last-child').append('say:  ');
+          $('li:last-child').append($('<span class="msg">').text(msg.msg));
+        }
+      });
+
+      socket.on('broadcast', function(msg){
+        console.log('broadcast!');
+        $('#join').html('<p><strong>Welcome to new friend.</strong></p>')
+      });
+
+      socket.on('socket', function(msg){
+        console.log(msg.num);
+        $('.num').html(msg.num);
+      });
+
+    </script>
+  </body>
+</html>
