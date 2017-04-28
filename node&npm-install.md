@@ -34,7 +34,7 @@ $ npm install express
 ```bash
 $ npm install experss -g
 ```
-* ### 将安装的包放在/user/local下，或者`node`的安装目录。
+* ### 将安装的包放在/usr/local下，或者`node`的安装目录。
 * ### 可以直接在命令行里使用。
 
 ## 查看安装的模块
@@ -100,6 +100,14 @@ $ npm update <packageName>
     $ npm install express --save
     
     $ npm install express --save-dev
+    ```
+    * 全局安装举例：
+    安装路径：/usr/local/lib/node_modules中 
+    ```bash
+    nodemon安装
+    $ sudo npm install nodemon -g --save
+    mongodb安装
+    $ sudo npm install mongodb -g --save
     ```
     
     * 卸载模块
