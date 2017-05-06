@@ -149,16 +149,16 @@ express.static(root,[options]);
 express.static 是 Express 唯一内置的中间件。它基于server-static,负责在Express应用中托管静态资源。
 * 参数root指提供静态资源的很目录
 * 可选的options参数拥有如下属性
-|属性|描述|类型|缺省值|
+| 属性 | 描述 | 类型 | 缺省值 |
 | :------: | :-----: | :-----: | :-----: |
-|dotfiles|是否对外输出文件名以点(.)开头的文件。可选值为'allow'、'deny'、'ignore'|String|'ignore'|
-|etag|是否启用etag生成|Boolean|true|
-|extensions|设置文件拓展名备份选项|Array|[]|
-|index|发送目录索引文件，设置为false禁用目录索引|Mixed|'index.html'|
-|lastModified|设置Last-Modified头为文件在操作系统上的最后修改日期。可能值为ture或false|Boolean|true|
-|maxAge|以毫秒或者其字符串格式设置Cache-Control头的max-age属性|Number|0|
-|redirect|当路径为目录时，重定向至'/'.|Boolean|true|
-|setHeaders|设置HTTP头以提供文件的函数|Function|  |
+| dotfiles | 是否对外输出文件名以点(.)开头的文件。可选值为'allow'、'deny'、'ignore' | String | 'ignore' |
+| etag | 是否启用etag生成 | Boolean | true |
+| extensions | 设置文件拓展名备份选项 | Array | [ ] |
+| index | 发送目录索引文件，设置为false禁用目录索引 | Mixed | 'index.html' |
+| lastModified | 设置Last-Modified头为文件在操作系统上的最后修改日期。可能值为ture或false | Boolean | true |
+| maxAge | 以毫秒或者其字符串格式设置Cache-Control头的max-age属性 | Number | 0 |
+| redirect | 当路径为目录时，重定向至'/'. | Boolean | true |
+| setHeaders |设置HTTP头以提供文件的函数 | Function |  |
 
 * 下面的例子使用了express.static中间件，其中的options对象经过了精心的设计
 ```js
