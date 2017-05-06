@@ -149,8 +149,9 @@ express.static(root,[options]);
 express.static 是 Express 唯一内置的中间件。它基于server-static,负责在Express应用中托管静态资源。
 * 参数root指提供静态资源的很目录
 * 可选的options参数拥有如下属性
+
 | 属性 | 描述 | 类型 | 缺省值 |
-| :------: | :-----: | :-----: | :-----: |
+| ------------------- |:-----------------:|:--------------:|:-------------------:|
 | dotfiles | 是否对外输出文件名以点(.)开头的文件。可选值为'allow'、'deny'、'ignore' | String | 'ignore' |
 | etag | 是否启用etag生成 | Boolean | true |
 | extensions | 设置文件拓展名备份选项 | Array | [ ] |
