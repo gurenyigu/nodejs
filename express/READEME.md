@@ -16,6 +16,9 @@ $ express -h
 
 创建一个项目 在当前目录
 $ express myProject(项目名称)
+or
+$ ecpress -e myProject
+-e 添加EJS引擎的支持。默认情况下使用JADE
 
 自动安装package.json中的所有模块
 $ cd myProject
