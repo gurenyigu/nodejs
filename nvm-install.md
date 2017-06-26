@@ -49,11 +49,11 @@ $ nvm alias default v***
 ```
 ### 给不同的版本号添加/删除别名
 ```bash
-nvm alias <name> <version>
+$ nvm alias <name> <version>
 
-nvm unalias <name>  ## 删除已定义的别名
+$ nvm unalias <name>  ## 删除已定义的别名
 ```
 ### 在当前版本node环境下，重新全局安装指定版本号的npm包
 ```bash
-nvm reinstall-packages <version>
+$ nvm reinstall-packages <version>
 ```
