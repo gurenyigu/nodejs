@@ -51,7 +51,7 @@ $ nvm alias default v***
 ```bash
 $ nvm alias <name> <version>
 
-$ nvm unalias <name>  ## 删除已定义的别名
+$ nvm unalias <name>
 ```
 ### 在当前版本node环境下，重新全局安装指定版本号的npm包
 ```bash
