@@ -1,15 +1,15 @@
 ## 中间件使用
 * Express 是一个自身功能极简，完全是由 路由 和 中间件 构成一个的WEB开发框架：从本质上来说，一个Express应用就是在调用各种中间件。
-* 中间件(Middleware) 是一个函数，它可以访问请求对象(request object(req)),响应对象 (response object(res)),和 web 应用中处于请求-响应循环流程中的中间件，一般被命名为next的变量。
+* 中间件`(Middleware)` 是一个函数，它可以访问请求对象`(request object(req))`,响应对象 `(response object(res))`,和 web 应用中处于请求-响应循环流程中的中间件，一般被命名为`next`的变量。
 * 中间件的功能包括:
   * 执行任何代码
   * 修改请求和响应对象
   * 终结请求-响应循环
   * 调用堆栈中的下一个中间件
 
-* 如果当前中间件没有终结请求-响应循环，则必须调用next()方法将控制权交给下一个中间件，否则请求将会挂起。
+* 如果当前中间件没有终结请求-响应循环，则必须调用`next()`方法将控制权交给下一个中间件，否则请求将会挂起。
 
-* Express应用可使用如下几种中间件:
+* `Express`应用可使用如下几种中间件:
   * 应用级中间件
   * 路由级中间件
   * 错误处理级中间件
@@ -19,7 +19,7 @@
 * 使用可选则挂载路径，可在应用级别或路由级别装载中间件。另外，你还可以同时装在一系列中间件函数，从而在一个挂载点上创建一个子中间栈
 
 ## 应用级中间件
-* 应用级中间件绑定到 app对象 使用app.use() 和 app.Method(), 其中 Method 是需要处理的HTTP请求的方法，例如： get post put 等，例如：
+* 应用级中间件绑定到 app对象 使用`app.use()` 和 `app.Method()`, 其中 `Method` 是需要处理的`HTTP`请求的方法，例如： `get` `post` `put` 等，例如：
 ```js
 var express = require('express');
 var app = express();
@@ -49,7 +49,7 @@ app.use('/user/:id',function(req,res,next){
   next();
 });
 ```
-* 作为中间件系统的路由句柄，使得为路径定义多个路由成为可能。在下面的例子中，为指向/user:id 的GET请求定义了两个路由。第二个路由虽然不会带来任何问题，但却永远不会被调用，因为第一个路由已经终止了请求-响应循环.
+* 作为中间件系统的路由句柄，使得为路径定义多个路由成为可能。在下面的例子中，为指向`/user:id` 的`GET`请求定义了两个路由。第二个路由虽然不会带来任何问题，但却永远不会被调用，因为第一个路由已经终止了请求-响应循环.
 ```js
 // 一个中间栈，处理指向/user/:id 的GET请求
 app.get('/user/:id',function(req,res,next){
@@ -65,7 +65,7 @@ app.get('/user/:id',function(req,res,next){
 });
 ```
 
-* 如果需要在中间件栈中跳过剩余中间件，调用next('route')方法将控制权限交给下一个路由。注意：next('route') 只对使用app.VERB()或router.VERB()加载的中间件有效。
+* 如果需要在中间件栈中跳过剩余中间件，调用`next('route')`方法将控制权限交给下一个路由。注意：next('route') 只对使用`app.VERB()`或`router.VERB()`加载的中间件有效。
 ```js
 // 一个中间件栈，处理指向 /user/:id 的GET请求
 app.get('/user/:id',function(req,res,next){
@@ -85,11 +85,11 @@ app.get('/user/:id',function(req,res,next){
 ```
 
 ## 路由级中间件
-* 路由级中间件和应用级中间件一样，只是它绑定的对象为express.Router().
+* 路由级中间件和应用级中间件一样，只是它绑定的对象为`express.Router()`.
 ```js
 var router = express.Router();
 ```
-* 路由级使用router.use()或者router.VERB()加载。
+* 路由级使用`router.use()`或者`router.VERB()`加载。
 上述在应用级创建的中间件系统，可通过如下代码改写为路由级：
 ```js
 var express = require('express');
@@ -133,7 +133,7 @@ app.use('/',router);
 * 以上就是一个路由级的示例
 
 ### 错误处理中间件
-  * 错误处理中间件有4个参数，定义错误处理中间件必须使用这4个参数，即使不需要next对象，也必须在签名中声明它，否则中间件会识别其为一个常规的中间件，不能处理错误。
+  * 错误处理中间件有4个参数，定义错误处理中间件必须使用这4个参数，即使不需要`next`对象，也必须在签名中声明它，否则中间件会识别其为一个常规的中间件，不能处理错误。
 * 错误处理中间件和其他中间件定义类似，只是要使用4个参数，而不是3个其签名如下： (err,req,res,next).
 ```js
 app.use(function(err,req,res,next){
@@ -144,11 +144,11 @@ app.use(function(err,req,res,next){
 * 具体会在[错误处理]()中了解更多
 
 ## 内置中间件
-* 从 4.x版本开始 ，Express 已经不再依赖 connect 了，除了 express.static, Express 以前内置的中间件现在已经全部单独作为模块安装使用了。请参考[中间件类表]()
+* 从 `4.x` 版本开始 ，`Express` 已经不再依赖 `connect` 了，除了 `express.static`, `Express` 以前内置的中间件现在已经全部单独作为模块安装使用了。请参考[中间件类表](https://github.com/senchalabs/connect#middleware)
 express.static(root,[options]);
-express.static 是 Express 唯一内置的中间件。它基于server-static,负责在Express应用中托管静态资源。
-* 参数root指提供静态资源的很目录
-* 可选的options参数拥有如下属性
+`express.static` 是 `Express` 唯一内置的中间件。它基于`server-static`,负责在`Express`应用中托管静态资源。
+* 参数`root`指提供静态资源的很目录
+* 可选的`options`参数拥有如下属性
 
 | 属性 | 描述 | 类型 | 缺省值 |
 | ------------------- |:-----------------:|:--------------:|:-------------------:|
@@ -161,7 +161,7 @@ express.static 是 Express 唯一内置的中间件。它基于server-static,负
 | redirect | 当路径为目录时，重定向至'/'. | Boolean | true |
 | setHeaders |设置HTTP头以提供文件的函数 | Function |  |
 
-* 下面的例子使用了express.static中间件，其中的options对象经过了精心的设计
+* 下面的例子使用了`express.static`中间件，其中的`options`对象经过了精心的设计
 ```js
 var options = {
   dotfiles: 'ignore',
@@ -182,3 +182,22 @@ app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
 ```
+* 更多关于`serve-static`和其参数的信息，参考[serve-static](https://github.com/expressjs/serve-static)文档
+
+## 第三方中间件
+* 通过使用第三方中间件从而为`Express`应用增加更多功能
+* 安装所需功能的`node`模块，并在应用中加载，可以在应用级加载，也可以在路由级加载。
+* 下面的例子安装并加载了一个解析`cookie`的中间件: `cookie-parser`
+```bash
+$ npm install cookie-parser
+```
+
+```js
+var express = require('express');
+var app = express();
+var cookieParser = require('cookie-parser');
+
+// 加载用于解析cookie的中间件
+app.use(cookieParser());
+```
+* 参考[第三方中间件](http://www.expressjs.com.cn/resources/middleware.html)获取Express中经常用到的第三方中间件列表

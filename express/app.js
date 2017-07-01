@@ -1,4 +1,5 @@
 var express = require('express');
+// 生成一个express
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -10,15 +11,23 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+// 实例化express 为app
 
-// view engine setup(设置)
+// 设置views文件夹为存放视图文件的目录,即存放模板文件的地方,__dirname为全局变量,存储当前正在执行的脚本所在的目录.
 app.set('views', path.join(__dirname, 'views'));
+// 设置视图模板引擎为 ejs
 app.set('view engine', 'ejs');
 
+// 设置/public/favicon.ico 为favicon 图标
 app.use(favicon());
+// app.use(favicon(__dirname + '/public/favicon.ico'));
+// 加载日志中间件
 app.use(logger('dev'));
+// 加载解析json的中间件
 app.use(bodyParser.json());
+// 加载解析urlencoded请求体的中间件
 app.use(bodyParser.urlencoded());
+// 加载解析 cookie的中间件
 app.use(cookieParser());
 
 // 静态文件 中间件
@@ -31,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 如果你希望所有通过express.static 访问的文件都存放在一个虚拟(virtual)的目录(不存在的目录)下 则可以：
 //  app.use('/virtual',ecpress.static('public'));  http://localhost:3000/virtual/****
 
+// 路由控制器
 app.use('/', routes);
 app.use('/users', users);
 
@@ -46,7 +56,7 @@ app.use(function(req, res, next) {
 // error handlers 错误处理
 
 // development error handler 处理开发错误
-// will print stacktrace  将显示错误信息
+// will print stacktrace  将404错误信息显示error模板渲染并显示到页面中
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -60,6 +70,7 @@ if (app.get('env') === 'development') {
 
 // production error handler  结果错误处理
 // no stacktraces leaked to user 没有跟踪错误信息显示给用户
+// 开发环境中的错误处理器,将错误信息渲染error模板并显示到浏览器中
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -69,5 +80,5 @@ app.use(function(err, req, res, next) {
   console.log('执行{}');
 });
 
-
+// 导出APP实例提供其他模块调用
 module.exports = app;

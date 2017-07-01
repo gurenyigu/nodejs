@@ -1,6 +1,6 @@
-## route
-* 路由是指如何定义应用的端点(URIs) 以及如何响应客户端的请求
-* 路由是由一个URI、HTTP请求(GET、POST等)和若干个句柄组成，它的结构如下：app.Method(path,[callback...],callback),app是express对象的一个实例，Method是一个HTTP请求方法，path是服务器上的路径，callback是当路由匹配时要执行的函数。
+## `route`
+* 路由是指如何定义应用的端点`(URIs)` 以及如何响应客户端的请求
+* 路由是由一个`URI`、`HTTP`请求(GET、POST等)和若干个句柄组成，它的结构如下：app.Method(path,[callback...],callback),app是`express`对象的一个实例，Method是一个HTTP请求方法，`path`是服务器上的路径，`callback`是当路由匹配时要执行的函数。
 
 一个基础路由示例：
 ```js
@@ -13,9 +13,9 @@ app.get('/',function(req,res){
 });
 ```
 
-* Express 定义了如下和HTTP请求对应的路由方法：get,post,put,head,delete,options,trace,copy,lock,mkcol,move,purge,propfind,proppatch,unlock,report,mkactivity,checkout,merge,m-search,notify,subscribe,unsubscribe,path,search,connect.
+* `Express` 定义了如下和HTTP请求对应的路由方法：get,post,put,head,delete,options,trace,copy,lock,mkcol,move,purge,propfind,proppatch,unlock,report,mkactivity,checkout,merge,m-search,notify,subscribe,unsubscribe,path,search,connect.
 
-* app.all()是一个特殊的路由方法，没有任何HTTP方法与其对应，他的作用是对于一个路径上的所有请求加载中间件。
+* `app.all()`是一个特殊的路由方法，没有任何`HTTP`方法与其对应，他的作用是对于一个路径上的所有请求加载中间件。
 * 下面一个例子中，来自'/secret'的 请求，不管使用GET，POST，PUT，DELETE或者其他任何HTTP模块支持的 HTTP 请求，句柄都会的得到执行。
 
 ```js
@@ -26,8 +26,8 @@ app.all('/secret',function(req,res,next){
 ```
 ## 路由路径
 * 路由路径和请求方法一起定义了请求的端点，它可以是字符串，字符串模式或者正则表达式。
-  * Express使用[path-to-regexp](https://www.npmjs.com/package/path-to-regexp)匹配路由路径(node 插件)，参考文档查阅其定义路由的方法。
-  * [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/)一个测试基本Express路径的在线工具，但不支持模式匹配。
+  * `Express`使用[path-to-regexp](https://www.npmjs.com/package/path-to-regexp)匹配路由路径(node 插件)，参考文档查阅其定义路由的方法。
+  * [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/)一个测试基本`Express`路径的在线工具，但不支持模式匹配。
 
 #### 使用 字符串 匹配路径的请求示例：
 ```js
@@ -142,7 +142,7 @@ app.get('/example/d',[cb0,cb1],function(req,res,next){
   res.send('hello from D!');
 });
 ```
-## 响应方法 response
+## 响应方法 `response`
 * 下列中响应对象 (res) 的方法向客户端返回响应，终结请求响应的循环。如果在路由句柄中一个方法也不调用，来自客户端的请求会一直挂起。
 
 | 方法 | 描述 |
@@ -157,8 +157,8 @@ app.get('/example/d',[cb0,cb1],function(req,res,next){
 | res.sendFile | 以八位字节流的形式发送文件 |
 | res.sendStatus() | 设置响应状态码，并将其以字符串形式作为响应体的一部分发送 |
 
-### app.route()
-* 可使用 app.route() 创建路由路径的链式路由句柄。由于路径在一个地方指定，这样有助于创建模块化路由，减少代码沉余和拼写错误。下面的示例程序使用app.route()定义了链式路由的句柄
+### `app.route()`
+* 可使用 app.route() 创建路由路径的链式路由句柄。由于路径在一个地方指定，这样有助于创建模块化路由，减少代码沉余和拼写错误。下面的示例程序使用`app.route()`定义了链式路由的句柄
 ```js
 app.toute('/book')
   .get(function(req,res){
@@ -171,6 +171,6 @@ app.toute('/book')
     res.send('Update the book');
   });
 ```
-## express.Router
-* 可使用 express.Router 类创建模块化、可挂载的路由句柄。Router实例是一个完整的中间件和路由系统，因此常称其为一个'mini-app'。下面的实例程序创建了一个路由模块，并加载了一个中间件，定义了一些路由，并且将他们挂载至应用路径上。
+## `express.Router`
+* 可使用 `express.Router` 类创建模块化、可挂载的路由句柄。`Router`实例是一个完整的中间件和路由系统，因此常称其为一个'mini-app'。下面的实例程序创建了一个路由模块，并加载了一个中间件，定义了一些路由，并且将他们挂载至应用路径上。
 ### [具体示例参考]()
