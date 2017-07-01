@@ -1,0 +1,61 @@
+<html>
+
+<head>
+  <script type="text/javascript">
+    function getCookie(c_name) {
+      if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        console.log(c_start); // 0
+        if (c_start != -1) {
+          c_start = c_start + c_name.length + 1;
+          console.log(c_start); // 9
+          // 从 9 开始查找 ; 的位置
+          c_end = document.cookie.indexOf(";", c_start);
+          // 如果不存在 ;, 则结束位置是末尾
+          if (c_end == -1) c_end = document.cookie.length;
+          // 提取 开始, 结束位置的内容
+          console.log(document.cookie.substring(c_start, c_end));
+          // 返回解码后的字符串
+          return unescape(document.cookie.substring(c_start, c_end));
+        }
+      }
+      // cookie 长度为 0 返回 空
+      return "";
+    }
+
+    function setCookie(c_name, value, expiredays) {
+      var exdate = new Date();
+      // 设置一年后 (expiredays = 365);
+      exdate.setDate(exdate.getDate() + expiredays);
+      console.log(exdate); // Sun Jul 01 2018 10:39:15 GMT+0800 (CST)
+      // let timeout = (expiredays == null) ? "" : ";expires=" + exdate.toGMTString();
+      // console.log(timeout);
+      document.cookie = c_name + "=" + escape(value);
+      // document.cookie = 'passwd=123';
+      // document.cookie = 'expires=' + exdate.toGMTString();
+      console.log(document.cookie); // username=sdfa; passwd=123
+    }
+
+    function checkCookie() {
+      username = getCookie('username');
+      // 读取到数据的话
+      if (username != null && username != "") {
+        alert('Welcome again ' + username + '!');
+      } else {
+        // prompt(text, defaultText) 提示框的输入框,
+        username = prompt('Please enter your name:', "")
+        // 提示框不为空, 内容不为空, 执行
+        if (username != null && username != "") {
+          setCookie('username', username, 1);
+        }
+      }
+    }
+    var str = '12345';
+    console.log(str.indexOf(3, 5));
+  </script>
+</head>
+
+<body onLoad="checkCookie()">
+</body>
+
+</html>

@@ -171,6 +171,12 @@ app.toute('/book')
     res.send('Update the book');
   });
 ```
+<<<<<<< HEAD
 ## `express.Router`
 * 可使用 `express.Router` 类创建模块化、可挂载的路由句柄。`Router`实例是一个完整的中间件和路由系统，因此常称其为一个'mini-app'。下面的实例程序创建了一个路由模块，并加载了一个中间件，定义了一些路由，并且将他们挂载至应用路径上。
 ### [具体示例参考]()
+=======
+## express.Router
+* 可使用 express.Router 类创建模块化、可挂载的路由句柄。Router实例是一个完整的中间件和路由系统，因此常称其为一个'mini-app'。下面的实例程序创建了一个路由模块，并加载了一个中间件，定义了一些路由，并且将他们挂载至应用路径上。
+### [具体示例参考](https://github.com/gurenyigu/nodejs/tree/master/express/ExpressAPI/Router)
+>>>>>>> 157b63a87c94ba79db5ce6d5192af302e311b36f

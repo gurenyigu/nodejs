@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet icon" href="file:///home/wds/study/WDS-html/html/day18/image/icon/favicon.ico">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>登录</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+    /* 清除浏览器默认获得焦点效果 */
+
+    input:focus {
+      outline: 0;
+    }
+
+    body {
+      font-size: 16px;
+      background: #eee;
+    }
+
+    .content {
+      margin: 0 auto;
+      width: 320px;
+      height: 500px;
+      position: relative;
+      /*transition: all 1s linear;*/
+    }
+
+    .web_login {
+      width: 290px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .g_list {
+      background: #fff;
+      height: 89px;
+      border-radius: 4px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .g_u {
+      /*border-bottom: 1px solid #eaeaea;*/
+    }
+
+    .g_u,
+    .g_p {
+      position: relative;
+    }
+
+    .inputstyle {
+      width: 100%;
+      height: 44px;
+      color: #000;
+      border: none;
+      padding-left: 15px;
+      font-size: 16px;
+      transition: all .2s linear;
+      border: 1px solid #af8441;
+    }
+
+    .inputstyle:hover,
+    .inputstyle:focus {
+      transform: scale(1.05, 1.05);
+      border-radius: 4px;
+    }
+
+    .log {
+      /*animation: height 3s linear;*/
+    }
+    /* 渐变背景 */
+
+    .bg-gradient {
+      position: absolute;
+      /*margin: 24px 30px 8px;*/
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: #dedede;
+      box-shadow: inset 0 150px 150px -120px rgba(0, 0, 0, .7), inset 0 -150px 150px -150px rgba(0, 0, 0, .5);
+      background-image: radial-gradient(circle, #ececec, #b8b8b8);
+      z-index: 1;
+    }
+
+    .auto_login {
+      /*float: left;*/
+      font-size: .98571em;
+      color: #777;
+      cursor: pointer;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .auto_login::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 15px;
+      height: 15px;
+      background: #fff;
+      border: 1px solid #af8441;
+    }
+
+    .auto_login::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 13px;
+      height: 13px;
+      transition: all .2s;
+      background-image: url('./images/ok.svg');
+
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .ok::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /*.off {}*/
+
+    .go {
+      width: 290px;
+      height: 44px;
+      line-height: 44px;
+      background-color: #000000;
+      border: 2px solid #262626;
+      font-weight: 700;
+      margin-top: 13px;
+      color: #c9aa71;
+      transition: all .3s linear;
+    }
+
+    .go:hover {
+      color: #f1e6d0;
+      background-color: #121212;
+    }
+
+    .wz {
+      width: 290px;
+      /*position: relative;*/
+      margin-top: 15px;
+    }
+
+    .getpw {
+      float: left;
+      color: red;
+    }
+
+    .getpw:hover {
+      color: #dec58d;
+    }
+
+    .newuser {
+      float: right;
+      color: #257372;
+    }
+
+    .newuser:hover {
+      color: #5cb2b1;
+    }
+
+    .getpw,
+    .newuser {
+      cursor: pointer;
+    }
+
+    .clearfix::after {
+      content: '';
+      clear: both;
+      /*overflow: hidden;*/
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content container in">
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">登录</button>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          密码错误
+        </div>
+      </div>
+    </div> -->
+    <div id="login" class='login'>
+      <img class='log' src="http://localhost:8000/images/lol-logo.png" alt="" width='290'>
+      <div class="web_login">
+        <!-- <div class="bg-gradient"></div> -->
+        <ul class="g_list">
+          <li class="g_u">
+            <div class="del_touch"></div>
+            <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
+            <!-- autofocus (页面加载完成, 自动获得焦点) -->
+            <!-- required (鼠标悬停提示填写字段) -->
+            <input type="email" autocomplete='on' name='user' class='inputstyle user' autofocus required placeholder="邮箱">
+          </li>
+          <li class="g_p">
+            <div class="del_touch"></div>
+            <input type="password" placeholder='密码' name='pw' class='inputstyle pwd' maxlength='16' required minlength='8'>
+          </li>
+        </ul>
+        <!-- 记住登录状态 -->
+        <label for="" class="auto_login">
+          自动登录
+        </label>
+        <!-- 登录按钮 -->
+        <button class='go'>登录</button>
+        <!-- 忘记密码 / 注册 -->
+        <div class="wz clearfix">
+          <span class="getpw">忘记密码?</span>
+          <span class="newuser">注册新用户</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function auto_Login() {
+      if (localStorage.getItem('autoLogin') == 'false') {
+        localStorage.setItem('autoLogin', true);
+      } else if (localStorage.getItem('autoLogin') == 'true') {
+        localStorage.setItem('autoLogin', false);
+      }
+    }
+
+    function getCookie() {
+      if (document.cookie.length > 0) {
+        var value = document.cookie.math(/user=([^=]*?);[^%s%S]*passwd=([^=]*?)/);
+        console.log(value);
+      }
+    }
+
+    function setCookie() {
+      document.cookie = 'user=' + $('.user').val();
+      document.cookie = 'passwd=' + $('.pwd').val();
+    }
+
+    // function checkCookie() {
+    //   var value = getCookie();
+    // }
+  </script>
+  <script>
+    $(document).ready(function() {
+
+      localStorage.setItem('autoLogin', false);
+      // autoLogin();
+      // checkCookie();
+      // alert();
+      $('.auto_login').click(function() {
+        $(this).toggleClass('ok');
+        auto_Login();
+        console.log(localStorage.getItem('autoLogin'));
+      });
+
+      $('.go').click(function() {
+        setCookie();
+      });
+    });
+  </script>
+</body>
+
+</html>

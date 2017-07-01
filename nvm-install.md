@@ -24,20 +24,36 @@ export NVM_DIR="$HOME/.nvm"
 ```
 ## 终端输入nvm查看所有命令
 
-### 查看`nodejs`版本信息
+### 查看`nodejs`远程服务器的所有版本
 ```bash
 $ nvm ls-remote
 ```
-### 安装一个`node`版本
+### 安装/删除一个`node`版本
 ```bash
 $ nvm install v****
+
+$ nvm uninstall v****
 ```
-### 查看本地当前版本
+### 查看本地所有版本
 ```bash
 $ nvm ls
+```
+### 显示当前版本
+```bash
+$ nvm current
 ```
 ### 多版本切换及设置默认
 ```bash
 $ nvm use v***
 $ nvm alias default v***
+```
+### 给不同的版本号添加/删除别名
+```bash
+$ nvm alias <name> <version>
+
+$ nvm unalias <name>
+```
+### 在当前版本node环境下，重新全局安装指定版本号的npm包
+```bash
+$ nvm reinstall-packages <version>
 ```
