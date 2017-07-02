@@ -33,7 +33,7 @@
       float: left;
     }
 
-    .login {
+    .logout {
       display: inline-block;
       float: right;
       color: #c9aa71;
@@ -42,7 +42,7 @@
       padding-right: 10px;
     }
 
-    .login:hover {
+    .logout:hover {
       color: #f1e6d0;
       text-decoration: none;
     }
@@ -113,6 +113,10 @@
     #userName {
       padding-bottom: 5px;
     }
+
+    #userSay {
+      text-align: left;
+    }
   </style>
 </head>
 
@@ -121,7 +125,7 @@
     <div id="scroller">
       <nav class='mod_header'>
         <img src="https://github.com/gurenyigu/Web-start/blob/master/image/lol-logo.png?raw=true" alt="" width='100' height='55' class='logo'>
-        <a href="http://localhost:8000/login" class='login'>登录</a>
+        <a href="http://localhost:8000/" class='logout'>注销</a>
       </nav>
       <header class='user'>
         <div class='content-border'>
@@ -218,6 +222,23 @@
       if ($("#scroller").height() > 0) {
         resizeScroller()
       }
+
+      function delAllCookie() {
+        var myDate = new Date();
+        myDate.setTime(-1000); //设置时间
+        var data = document.cookie;
+        var dataArray = data.split("; ");
+        for (var i = 0; i < dataArray.length; i++) {
+          var varName = dataArray[i].split("=");
+          document.cookie = varName[0] + "=''; expires=" + myDate.toGMTString();
+        }
+      }
+
+      $('#userName').html(document.cookie.match(/user=([^=]*);+/)[1]);
+      // console.log(getCookie('user'));
+      $('.logout').click(function() {
+        delAllCookie();
+      });
     });
   </script>
 </body>

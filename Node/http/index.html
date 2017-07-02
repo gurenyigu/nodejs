@@ -17,6 +17,7 @@
       margin: 0;
       list-style: none;
       text-decoration: none;
+      transition: all .2s;
     }
     /* 清除浏览器默认获得焦点效果 */
 
@@ -45,7 +46,6 @@
 
     .g_list {
       background: #fff;
-      height: 89px;
       border-radius: 4px;
       position: relative;
       z-index: 2;
@@ -123,7 +123,7 @@
       width: 13px;
       height: 13px;
       transition: all .2s;
-      background-image: url('./images/ok.svg');
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iI2FmODQ0MSIgZD0iTTI3IDRMMTIgMTlsLTctNy01IDUgMTIgMTJMMzIgOXoiLz48L3N2Zz4K');
 
       opacity: 0;
       transform: scale(0);
@@ -187,6 +187,20 @@
       /*overflow: hidden;*/
       display: block;
     }
+
+    .err,
+    .err_p {
+      background-color: #eee;
+      /*font-size: 17px;*/
+      color: rgb(255, 91, 91);
+      padding-top: 5px;
+      padding-bottom: 10px;
+    }
+
+    .glyphicon {
+      width: 17px;
+      height: 17px;
+    }
   </style>
 </head>
 
@@ -202,28 +216,39 @@
       </div>
     </div> -->
     <div id="login" class='login'>
-      <img class='log' src="http://localhost:8000/images/lol-logo.png" alt="" width='290'>
+      <img class='log' src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/lol-logo.png?raw=true" alt="" width='290'>
       <div class="web_login">
         <!-- <div class="bg-gradient"></div> -->
-        <ul class="g_list">
-          <li class="g_u">
-            <div class="del_touch"></div>
-            <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
-            <!-- autofocus (页面加载完成, 自动获得焦点) -->
-            <!-- required (鼠标悬停提示填写字段) -->
-            <input type="email" autocomplete='on' name='user' class='inputstyle user' autofocus required placeholder="邮箱">
-          </li>
-          <li class="g_p">
-            <div class="del_touch"></div>
-            <input type="password" placeholder='密码' name='pw' class='inputstyle pwd' maxlength='16' required minlength='8'>
-          </li>
-        </ul>
-        <!-- 记住登录状态 -->
-        <label for="" class="auto_login">
+        <form action="/user" method='POST'>
+          <ul class="g_list">
+            <li class="g_u">
+              <div class="del_touch"></div>
+              <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
+              <!-- autofocus (页面加载完成, 自动获得焦点) -->
+              <!-- required (鼠标悬停提示填写字段) -->
+              <input type="text" autocomplete='on' name='user' class='inputstyle user' required placeholder="用户名">
+            </li>
+            <div class="err" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text'></span>
+              <!-- <span class="glyphicon"></span> -->
+            </div>
+            <li class="g_p">
+              <div class="del_touch"></div>
+              <input type="password" placeholder='密码' name='pwd' class='inputstyle pwd' maxlength='16' required>
+            </li>
+            <div class="err_p" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text_p'></span>
+            </div>
+          </ul>
+          <!-- 记住登录状态 -->
+          <label for="" class="auto_login">
           自动登录
         </label>
-        <!-- 登录按钮 -->
-        <button class='go'>登录</button>
+          <!-- 登录按钮 -->
+          <button class='go'>登录</button>
+        </form>
         <!-- 忘记密码 / 注册 -->
         <div class="wz clearfix">
           <span class="getpw">忘记密码?</span>
@@ -233,6 +258,8 @@
     </div>
   </div>
   <script>
+    var cookies = document.cookie.length;
+
     function auto_Login() {
       if (localStorage.getItem('autoLogin') == 'false') {
         localStorage.setItem('autoLogin', true);
@@ -242,10 +269,23 @@
     }
 
     function getCookie() {
-      if (document.cookie.length > 0) {
-        var value = document.cookie.math(/user=([^=]*?);[^%s%S]*passwd=([^=]*?)/);
-        console.log(value);
+      // 如果 cookie 存在, 必填, 这里提交前会设置, 所以有长度, 就存在
+      if (cookies) {
+        // user 的起始位置匹配
+        var user_s = document.cookie.indexOf('user=');
+        // user 长度 + 'user=' 起始位置 == 用户输入位置
+        user_s = 'user='.length + user_s;
+        // 用户输入的结束位置 ';' 索引, 结束从前面的结束位置开始查找
+        user_e = document.cookie.indexOf(';', user_s);
+        // 截取用户输入的 username
+        // console.log(document.cookie.substring(user_s, user_e));
+        var pwd_s = document.cookie.indexOf('passwd=');
+        pwd_s = pwd_s + 'passwd='.length;
+        pwd_e = document.cookie.length;
+        // console.log(document.cookie.substring(pwd_s, pwd_e));
+        return [document.cookie.substring(user_s, user_e), document.cookie.substring(pwd_s, pwd_e)];
       }
+      return '';
     }
 
     function setCookie() {
@@ -255,23 +295,85 @@
 
     // function checkCookie() {
     //   var value = getCookie();
+    //   if (value == '') {
+    //     alert('cookie出错!!!');
+    //     setCookie();
+    //   } else {
+    //     console.log(value[0], value[1]);
+    //   }
     // }
   </script>
   <script>
     $(document).ready(function() {
+      /* 自动登录 */
+      if (localStorage.getItem('autoLogin') == 'true' && cookies) {
+        let select = confirm('检测到用户信息, 进行自动登录?');
+        if (select == true) {
+          let value = getCookie();
+          $('.user').val(value[0]);
+          $('.pwd').val(value[1]);
+          $('.auto_login').toggleClass('ok');
+          user_text = true;
+          passwd_text = true;
+        } else {
+          localStorage.setItem('autoLogin', false);
+        }
+      }
 
-      localStorage.setItem('autoLogin', false);
-      // autoLogin();
-      // checkCookie();
-      // alert();
+      /* 地动登录选择模块 */
       $('.auto_login').click(function() {
         $(this).toggleClass('ok');
         auto_Login();
-        console.log(localStorage.getItem('autoLogin'));
+        // console.log(localStorage.getItem('autoLogin'));
+      });
+      /* 表单校验  点击登录设置cookie */
+      var user_text;
+      var passwd_text;
+      $('form').submit(function() {
+        if (user_text && passwd_text) {
+          setCookie();
+          return true;
+        } else {
+          return false;
+        }
       });
 
-      $('.go').click(function() {
-        setCookie();
+
+      $('.user').focusout(function() {
+        user_text = false;
+        let value = $(this).val();
+        if (value == '') {
+          $('.err_text').html('用户名不能为空!');
+          $('.err').show();
+        } else if (/\s+/.test(value)) {
+          $('.err_text').html('用户名不能存在空格!');
+          $('.err').show();
+        } else if (value.length < 5 && /[\u0000-\u00FF]/.test(value)) {
+          $('.err_text').html('用户名必须大于5位!');
+          $('.err').show();
+        } else {
+          $('.err').hide();
+          user_text = true;
+        }
+      });
+
+      $('.pwd').focusout(function() {
+        passwd_text = false;
+        let value = $(this).val();
+        if (value == '') {
+          $('.err_text_p').html('密码不能为空!');
+          $('.err_p').show();
+        } else if (/\s+/.test(value)) {
+          $('.err_text_p').html('密码中不能存在空格!');
+          $('.err_p').show();
+        } else if (value.length < 8) {
+          $('.err_text_p').html('密码必须大于8位小于16位!');
+          $('.err_p').show();
+        } else {
+          $('.err_p').hide();
+          // console.log(value.length);
+          passwd_text = true;
+        }
       });
     });
   </script>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>注册</title>
+  <style>
+    .frame {
+      padding-top: 100px;
+    }
+
+    .container {
+      background: url("http://localhost:3000/images/bg-scale-v2.jpg");
+      width: 100%;
+    }
+
+    .container .jumbotron {
+      background-origin: content-box;
+      /*    background: url('http://localhost:3000/images/border/frame-top-left.png') left top no-repeat,
+          url('http://localhost:3000/images/border/frame-top-right.png') right top no-repeat,
+          url('http://localhost:3000/images/border/frame-bottom-left.png') left bottom no-repeat,
+          url('http://localhost:3000/images/border/frame-bottom-right.png') right bottom no-repeat;
+      */
+      background-color: transparent;
+    }
+
+    .container .jumbotron .back {
+      width: 850px;
+      border-radius: 20px;
+      background-image: radial-gradient(circle, #ececec, #b8b8b8);
+    }
+
+    .container .jumbotron .back .form-horizontal {
+      padding: 20px 50px;
+      position: relative;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-top-left {
+      top: -15px;
+      left: -35px;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-top-right {
+      top: -15px;
+      right: -35px;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-bottom-left {
+      bottom: -10px;
+      left: -35px;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-bottom-right {
+      bottom: -10px;
+      right: -35px;
+    }
+
+    .container .jumbotron .back .form-horizontal .border-frame {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .container .jumbotron .back .form-horizontal .bk-frame {
+      position: absolute;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-top {
+      width: 90%;
+      height: 24px;
+      background: url("http://localhost:3000/images/border/frame-top.jpg");
+      top: -15px;
+      left: 45px;
+      background-repeat: repeat-x;
+      background-position: bottom;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-bottom {
+      width: 90%;
+      height: 24px;
+      background: url("http://localhost:3000/images/border/frame-bottom.jpg");
+      bottom: -14px;
+      left: 45px;
+      background-repeat: repeat-x;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-left {
+      height: 100%;
+      width: 17px;
+      background: url("http://localhost:3000/images/border/frame-side-left.jpg");
+      top: 0px;
+      left: -22px;
+    }
+
+    .container .jumbotron .back .form-horizontal .frame-right {
+      height: 100%;
+      width: 17px;
+      background: url("http://localhost:3000/images/border/frame-side-right.jpg");
+      top: 0px;
+      right: -22px;
+    }
+
+    .container .jumbotron .back .form-horizontal .logo-lol {
+      margin: auto;
+      top: -95px;
+      left: 0;
+      right: 0;
+      z-index: 4;
+    }
+
+    fieldset {
+      padding-top: 25px;
+    }
+
+    fieldset .fire {
+      font-size: 40px;
+      color: #af8441;
+      text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, -10px -90px 80px #451b0e;
+      text-align: center;
+      border-bottom: solid 2px #af8441;
+    }
+
+    @media screen and (max-width: 450px) {
+      fieldset .fire {
+        font-size: 30px;
+      }
+    }
+
+    fieldset .box {
+      border: 1px solid #af8441;
+      width: 100%;
+      height: 32px;
+      padding: 3px 7px;
+    }
+
+    fieldset .font {
+      font-size: 20px;
+    }
+
+    fieldset .controle {
+      padding: 10px 0;
+    }
+
+    fieldset .read {
+      margin: 10px 10px;
+    }
+
+    fieldset .help-block {
+      font-size: 15px;
+      color: #777;
+    }
+
+    fieldset .help-block a {
+      color: #1d9998;
+    }
+
+    fieldset .help-block a:hover {
+      text-decoration: line-through;
+    }
+
+    fieldset .btn-c {
+      text-align: center;
+    }
+
+    fieldset .btn-success {
+      background: linear-gradient(to bottom, #7a6d48 0, #f4dca2 60%, #5a533a 100%);
+      height: 45px;
+      width: 100%;
+      max-width: 349px;
+      min-width: 130px;
+      border: 1px solid transparent;
+      padding: 0;
+    }
+
+    fieldset .btn-success:hover {
+      border: 1px solid transparent;
+    }
+
+    fieldset .btn-success .start {
+      width: 100%;
+      height: 100%;
+      padding: 0 1px;
+      background: linear-gradient(to bottom, rgba(161, 34, 0, 0) 0, #a12200 100%) #ea7a00;
+      background: -webkit-linear-gradient(top, rgba(161, 34, 0, 0) 0, #a12200 100%) #ea7a00;
+      color: #fdecce;
+      font-size: 25px;
+      text-align: center;
+      line-height: 45px;
+      font-weight: 700;
+      display: block;
+    }
+
+    fieldset .btn-success .start:hover {
+      background: linear-gradient(to bottom, rgba(161, 34, 0, 0) 0, #a12200 80%) #ea7a00;
+    }
+
+    fieldset .btn-success .div-center {
+      padding: auto;
+    }
+
+    fieldset .btn-success .x-radio {
+      margin-left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container frame">
+    <div class="jumbotron">
+      <div class="container table back">
+        <form class="form-horizontal">
+          <div class="frame-top-left border-frame">
+            <img src="http://localhost:3000/images/border/frame-top-left.png" alt="">
+          </div>
+          <div class="frame-top-right border-frame">
+            <img src="http://localhost:3000/images/border/frame-top-right.png" alt="">
+          </div>
+          <div class="frame-bottom-left border-frame">
+            <img src="http://localhost:3000/images/border/frame-bottom-left.png" alt="">
+          </div>
+          <div class="frame-bottom-right border-frame">
+            <img src="http://localhost:3000/images/border/frame-bottom-right.png" alt="">
+          </div>
+          <div class="frame-top bk-frame"></div>
+          <div class="frame-bottom bk-frame"></div>
+          <div class="frame-left bk-frame"></div>
+          <div class="frame-right bk-frame"></div>
+          <div class="">
+            <img class='logo-lol bk-frame' src="http://localhost:3000/images/lol-logo.png" alt="">
+          </div>
+          <fieldset>
+            <div id="legend" class="">
+              <legend class="fire">加入英雄联盟</legend>
+            </div>
+
+
+            <div class="control-group col-lg-6 col-md-6">
+
+              <!-- Text input-->
+              <label class="control-label font" for="input01">输入姓名</label>
+              <div class="controls">
+                <input type="text" placeholder="姓名" class="input-xlarge box">
+                <p class="help-block"></p>
+              </div>
+              <!-- </div> -->
+
+              <!-- <div class="control-group">
+
+              <label class="control-label font">选择班级</label>
+              <div class="controls">
+                <select class="input-xlarge">
+      <option>建模</option>
+      <option>U3D</option>
+      <option>H  5</option></select>
+              </div>
+
+            </div> -->
+              <!-- <div class="control-group"> -->
+
+              <!-- Text input-->
+              <label class="control-label font" for="input01">输入年龄</label>
+              <div class="controls">
+                <input type="number" placeholder="年龄" maxlength="2" class="input-xlarge box">
+                <p class="help-block"></p>
+              </div>
+              <!-- </div> -->
+
+              <!-- <div class="control-group"> -->
+
+              <!-- Text input-->
+              <label class="control-label font" for="input01">输入电话</label>
+              <div class="controls">
+                <input type="number" placeholder="号码" maxlength="11" class="input-xlarge box">
+                <p class="help-block"></p>
+              </div>
+            </div>
+
+
+            <!-- <div class="control-group">
+              <label class="control-label">Radio buttons</label>
+              <div class="controls">
+
+                <label class="radio">
+                      <input type="radio" value="Option one" name="group" checked="checked">
+                      Option one
+                    </label>
+                <label class="radio">
+                      <input type="radio" value="Option two" name="group">
+                      Option two
+                    </label>
+              </div> -->
+
+
+            <div class="control-group col-lg-6 col-md-6">
+              <label class="control-label font">选择你的性别</label>
+              <div class="controls">
+
+                <!-- Inline Radios -->
+                <label class="radio inline col-lg-6 col-md-6">
+                            <input type="radio" value="1" checked="checked" name="group">
+                            男
+                          </label>
+                <label class="radio inline col-lg-6 col-md-6">
+                            <input type="radio" value="2" name="group">
+                            女
+                          </label>
+
+              </div>
+              <!-- </div> -->
+
+              <!-- <div class="control-group"> -->
+
+              <!-- Text input-->
+              <label class="control-label font" for="input01">输入城市</label>
+              <div class="controls">
+                <input type="text" placeholder="你从哪里来～我的朋友" class="input-xlarge box">
+                <p class="help-block"></p>
+              </div>
+              <!-- </div> -->
+              <!-- <div class="control-group"> -->
+
+              <!-- Text input-->
+              <label class="control-label font" for="input01">输入身份证号</label>
+              <div class="controls">
+                <input type="number" placeholder="身份证号码" maxlength="18" class="input-xlarge box">
+                <p class="help-block"></p>
+              </div>
+              <!-- </div> -->
+              <!--
+            <div class="control-group">
+              <label class="control-label font">性别</label>
+              <div class="controls">
+
+                <label class="radio float col-xs-4">
+                    <input type="radio" value="男性">男性
+                </label>
+                <label class="radio float col-xs-4">
+                  <input type="radio" value="女性">女性
+                </label>
+                <label class="radio float col-xs-4">
+                  <input type="radio" value="畜生">畜生
+                </label>
+              </div>
+
+            </div> -->
+
+              <!-- <div class="control-group">
+
+              <label class="control-label font">自我介绍</label>
+              <div class="controls">
+                <div class="textarea">
+                  <textarea type="" class=" box"> I`m SB.</textarea>
+                </div>
+              </div> -->
+            </div>
+            <!-- <div class="control-group"> -->
+
+            <!-- Appended checkbox -->
+            <label class="control-label font">阅读协议并输入</label>
+            <div class="controls">
+              <div class="input-append">
+                <input class="span2 box" placeholder="输入 ‘我同意’  同意一切协议" type="text">
+                <span class="add-on">
+                <label class="radio inline" for="appendedCheckbox">
+                  <!-- <input type="checkbox" class="read" checked="checked"> -->
+                  <p class="help-block">
+                    <input type="radio" value="3" class = 'x-radio'>
+                    &nbsp;&nbsp;&nbsp;&nbsp;这是一份你必须同意的协议,不用<a href="">阅读</a>了.
+                  </p>
+                </label>
+              </span>
+              </div>
+
+            </div>
+            <!-- </div> -->
+
+            <div class="control-group div-center">
+              <label class="control-label"></label>
+
+              <!-- Button -->
+              <div class="controls btn-c">
+                <button class="btn btn-success">
+                  <span class="start">现在加入！</span>
+                </button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
