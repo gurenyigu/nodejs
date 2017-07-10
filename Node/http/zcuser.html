@@ -15,7 +15,7 @@
     }
 
     .container {
-      background: url("http://localhost:3000/images/bg-scale-v2.jpg");
+      background: url("https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/bg-scale-v2.jpg?raw=true");
       width: 100%;
     }
 
@@ -72,17 +72,18 @@
     .container .jumbotron .back .form-horizontal .frame-top {
       width: 90%;
       height: 24px;
-      background: url("http://localhost:3000/images/border/frame-top.jpg");
-      top: -15px;
+      background: url("https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-top.jpg?raw=true");
+      top: -35px;
       left: 45px;
       background-repeat: repeat-x;
       background-position: bottom;
+      position: relative;
     }
 
     .container .jumbotron .back .form-horizontal .frame-bottom {
       width: 90%;
       height: 24px;
-      background: url("http://localhost:3000/images/border/frame-bottom.jpg");
+      background: url("https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-bottom.jpg?raw=true");
       bottom: -14px;
       left: 45px;
       background-repeat: repeat-x;
@@ -91,7 +92,7 @@
     .container .jumbotron .back .form-horizontal .frame-left {
       height: 100%;
       width: 17px;
-      background: url("http://localhost:3000/images/border/frame-side-left.jpg");
+      background: url("https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-side-left.jpg?raw=true");
       top: 0px;
       left: -22px;
     }
@@ -99,7 +100,7 @@
     .container .jumbotron .back .form-horizontal .frame-right {
       height: 100%;
       width: 17px;
-      background: url("http://localhost:3000/images/border/frame-side-right.jpg");
+      background: url("https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-side-right.jpg?raw=true");
       top: 0px;
       right: -22px;
     }
@@ -205,6 +206,63 @@
     fieldset .btn-success .x-radio {
       margin-left: 0;
     }
+
+    footer::before {
+      height: 166px;
+      position: absolute;
+      width: 100%;
+      z-index: 2;
+      bottom: 152px;
+      content: '';
+      overflow: hidden;
+      background: url('https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/bg-footer-compact.png?raw=true') center bottom no-repeat;
+    }
+
+    .bd-l {
+      position: absolute;
+      /*margin: auto;*/
+      left: -42px;
+      /*right: 0;*/
+      top: 5px;
+    }
+
+    .bd-r {
+      position: absolute;
+      /*margin: auto;*/
+      /*left: -123px;*/
+      right: -4%;
+      top: 5px;
+    }
+
+    @media screen and (max-width: 992px) {
+      footer::before {
+        display: none;
+      }
+    }
+
+    .black {
+      height: 152px;
+      width: auto;
+      background-color: #000;
+    }
+
+    @media screen and (max-width: 992px) {
+      .black {
+        display: none;
+      }
+    }
+
+    .input-xlarge:focus {
+      outline: 0 none;
+      /*border-color: #a98f5d;
+      background: linear-gradient(to bottom, #1e2328, #292d30);
+      border-image: linear-gradient(to bottom, #785A28, #c8aa6e) 1 stretch;*/
+    }
+
+    .control-group {
+      position: relative;
+      z-index: 3;
+    }
   </style>
 </head>
 
@@ -214,36 +272,39 @@
       <div class="container table back">
         <form class="form-horizontal">
           <div class="frame-top-left border-frame">
-            <img src="http://localhost:3000/images/border/frame-top-left.png" alt="">
+            <img src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-top-left.png?raw=true" alt="">
           </div>
           <div class="frame-top-right border-frame">
-            <img src="http://localhost:3000/images/border/frame-top-right.png" alt="">
+            <img src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-top-right.png?raw=true" alt="">
           </div>
           <div class="frame-bottom-left border-frame">
-            <img src="http://localhost:3000/images/border/frame-bottom-left.png" alt="">
+            <img src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-bottom-left.png?raw=true" alt="">
           </div>
           <div class="frame-bottom-right border-frame">
-            <img src="http://localhost:3000/images/border/frame-bottom-right.png" alt="">
+            <img src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-bottom-right.png?raw=true" alt="">
           </div>
-          <div class="frame-top bk-frame"></div>
+          <div class="frame-top bk-frame">
+            <img class='bd-l' src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-top-left-swoop.png?raw=true" alt="">
+            <img class='bd-r' src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/border/frame-top-right-swoop.png?raw=true" alt="">
+          </div>
           <div class="frame-bottom bk-frame"></div>
           <div class="frame-left bk-frame"></div>
           <div class="frame-right bk-frame"></div>
           <div class="">
-            <img class='logo-lol bk-frame' src="http://localhost:3000/images/lol-logo.png" alt="">
+            <img class='logo-lol bk-frame' src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/lol-logo.png?raw=true" alt="">
           </div>
           <fieldset>
             <div id="legend" class="">
-              <legend class="fire">加入英雄联盟</legend>
+              <legend class="fire">注册</legend>
             </div>
 
 
             <div class="control-group col-lg-6 col-md-6">
 
               <!-- Text input-->
-              <label class="control-label font" for="input01">输入姓名</label>
+              <label class="control-label font" for="input01">输入用户名</label>
               <div class="controls">
-                <input type="text" placeholder="姓名" class="input-xlarge box">
+                <input type="text" placeholder="用户名" class="input-xlarge box">
                 <p class="help-block"></p>
               </div>
               <!-- </div> -->
@@ -296,18 +357,22 @@
 
 
             <div class="control-group col-lg-6 col-md-6">
-              <label class="control-label font">选择你的性别</label>
+              <label class="control-label font">输入密码</label>
               <div class="controls">
+                <div class="controls">
+                  <input type="text" placeholder="密码" class="input-xlarge box">
+                  <p class="help-block"></p>
+                </div>
 
                 <!-- Inline Radios -->
-                <label class="radio inline col-lg-6 col-md-6">
+                <!-- <label class="radio inline col-lg-6 col-md-6">
                             <input type="radio" value="1" checked="checked" name="group">
                             男
                           </label>
                 <label class="radio inline col-lg-6 col-md-6">
                             <input type="radio" value="2" name="group">
                             女
-                          </label>
+                          </label> -->
 
               </div>
               <!-- </div> -->
@@ -315,9 +380,9 @@
               <!-- <div class="control-group"> -->
 
               <!-- Text input-->
-              <label class="control-label font" for="input01">输入城市</label>
+              <label class="control-label font" for="input01">输入邮箱</label>
               <div class="controls">
-                <input type="text" placeholder="你从哪里来～我的朋友" class="input-xlarge box">
+                <input type="email" placeholder="邮箱地址" class="input-xlarge box">
                 <p class="help-block"></p>
               </div>
               <!-- </div> -->
@@ -360,22 +425,24 @@
             <!-- <div class="control-group"> -->
 
             <!-- Appended checkbox -->
-            <label class="control-label font">阅读协议并输入</label>
-            <div class="controls">
+
+            <!-- <div class="controls">
               <div class="input-append">
+                <label class="control-label font">阅读协议并输入</label>
                 <input class="span2 box" placeholder="输入 ‘我同意’  同意一切协议" type="text">
                 <span class="add-on">
                 <label class="radio inline" for="appendedCheckbox">
-                  <!-- <input type="checkbox" class="read" checked="checked"> -->
-                  <p class="help-block">
-                    <input type="radio" value="3" class = 'x-radio'>
-                    &nbsp;&nbsp;&nbsp;&nbsp;这是一份你必须同意的协议,不用<a href="">阅读</a>了.
-                  </p>
+
+
                 </label>
               </span>
               </div>
 
-            </div>
+            </div> -->
+            <p class="help-block">
+              <!-- <input type="radio" value="3" class = 'x-radio'> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;这是一份你必须同意的协议,不用<a href="">阅读</a>了.
+            </p>
             <!-- </div> -->
 
             <div class="control-group div-center">
@@ -394,7 +461,9 @@
       </div>
     </div>
   </div>
-
+  <footer>
+    <div class="black"></div>
+  </footer>
 </body>
 
 </html>

@@ -456,10 +456,108 @@ pre {
 .web_wechat_message_fail {
   display: inline-block;
   vertical-align: middle;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   background-image: url("../images/jl.png");
   background-repeat: no-repeat;
-  background-position: -289px -432px; }
+  background-position: -467px -330px; }
+
+.message_empty {
+  text-align: center;
+  margin-top: 130px;
+  color: #a7b8ca;
+  font-size: 13px; }
+  .message_empty .web_wechat_nomes_icon {
+    margin-bottom: 10px;
+    width: 135px;
+    height: 112px;
+    background-image: url("../images/sidebar-left-icons.png");
+    background-repeat: no-repeat;
+    background-position: -22px -260px; }
+
+.web_wechat_nomes_icon,
+.web_wechat_noread {
+  display: inline-block;
+  vertical-align: middle; }
+
+.chat .box_ft {
+  height: 180px;
+  border-top: 1px solid #d6d6d6; }
+  .chat .box_ft .toolbar {
+    height: 30px;
+    padding: 5px 17px; }
+  .chat .box_ft .content .flex {
+    height: 6em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 20px;
+    outline: none;
+    border: 0;
+    font-size: 14px;
+    margin-right: 19px; }
+  .chat .box_ft .action {
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 19px; }
+    .chat .box_ft .action .desc {
+      color: #888;
+      font-size: 12px;
+      margin-left: 10px;
+      margin-right: 7px; }
+
+.box_ft {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.web_wechat_face {
+  width: 30px;
+  height: 30px;
+  background: url("../images/jl.png") no-repeat;
+  background-position: -404px -398px;
+  -webkit-background-size: 487px 462px;
+  background-size: 487px 462px; }
+
+.web_wechat_down_icon,
+.web_wechat_face {
+  display: inline-block;
+  vertical-align: middle; }
+
+a.btn {
+  text-decoration: none; }
+
+.btn_send {
+  background-color: #fff;
+  color: #222;
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.btn {
+  display: inline-block;
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
+  padding: 3px 20px;
+  font-size: 14px; }
+
+.message .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  float: left;
+  cursor: pointer; }
+
+.bubble.bubble_default {
+  background-color: #fff; }
+
+.bubble.left:after,
+.bubble.left:before {
+  right: 100%; }
+
+.bubble.left:after {
+  border-right-color: #fff;
+  border-right-width: 4px; }
 
 /*# sourceMappingURL=style.css.map */

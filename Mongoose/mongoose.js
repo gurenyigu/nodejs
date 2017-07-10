@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 //  断言
 var assert = require('assert');
-var url = 'mongodb://127.0.0.1:27017/one';
+
+var url = 'mongodb://wudo:123456@ds163360.mlab.com:63360/first';
+// var url = 'mongodb://127.0.0.1:27017/one';
 /*
 使用mongoose进行数据库操作时，总是提示：
 (node:5684) DeprecationWarning: Mongoose: mpromise (mongoose’s default promise library) is deprecated, plug in your own promise library instead: http://mongoosejs.com/docs/promises.html

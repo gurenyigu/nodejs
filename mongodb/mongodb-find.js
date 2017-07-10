@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
-var url = 'mongodb://127.0.0.1:27017/frist';
+var url = 'mongodb://127.0.0.1:27017/manage';
 
 var findDB = function(db, callback) {
 
@@ -11,6 +11,7 @@ var findDB = function(db, callback) {
   cursor = db.collection('home').find({
     'address': 'daxing'
   });
+
   // 嵌套数据查询
   cursor = db.collection('home').find({
     'famliy.father': 'ping'
@@ -38,7 +39,6 @@ var findDB = function(db, callback) {
     'age.father': 1,
     'family.father': 1
   });
-
   var i = 0;
 
   cursor.each(function(err, doc) {
@@ -69,3 +69,6 @@ MongoClient.connect(url, function(err, db) {
     });
   }
 });
+
+
+// module.exports.findDB = findDB;

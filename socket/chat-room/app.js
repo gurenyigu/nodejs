@@ -17,6 +17,9 @@ io.on('connection', function(socket) {
   for (var key in io.sockets.sockets) {
     console.log(key);
   }
+  // console.log(socket.request.connection.remoteAddress);
+  // var address = socket.handshake.address;
+  // console.log("New connection from " + address.address + ":" + address.port);
   // console.log(io.sockets.sockets);
   // 将每此链接用户的key 唯一ID发送给前端
   socket.emit('id', key);

@@ -31,13 +31,13 @@ http.createServer((req, res) => {
     } catch (err) {
       error(err);
     }
-  } else if (req.url == '/login' && req.method == 'GET') {
+  } else if (req.url == '/zc' && req.method == 'GET') {
     res.writeHead(200, {
       'content-Type': 'text/html'
     });
     // console.log(1);
     try {
-      let content = fs.readFileSync('./index.html', 'utf-8');
+      let content = fs.readFileSync('./zcuser.html', 'utf-8');
       res.end(content);
     } catch (err) {
       error(err);

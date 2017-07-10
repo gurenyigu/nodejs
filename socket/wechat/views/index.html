@@ -6,6 +6,7 @@
   <title>WeChat</title>
   <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
   <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="../public/stylesheets/style.css">
 </head>
@@ -134,15 +135,15 @@
           <!-- 聊天框部分 -->
           <div class="scroll-wrapper box_bd chat_bd scrollbar-dynamic">
             <div class="box_bd chat_bd scrollbar-dynamic scroll-content" style="margin-bottom: 0px; margin-right: 0px; height: 499px;">
-              <div class="ng-scope">
+              <div class="ng-scope" id='chat_content'>
                 <div class="top-placeholder ng-scope" style='height: 0px'></div>
-                <!-- 单个消息 -->
+                <!-- 我方 单个消息 -->
                 <div class="ng-scope">
                   <div class="clearfix">
                     <div style="overflow: hidden">
                       <!-- 消息内容开始 -->
                       <div class="message ng-scope me">
-                        <!-- 事件部分 -->
+                        <!-- 时间部分 -->
                         <div class="message_system ng-scope">
                           <!-- 时间 -->
                           <div class="content ng-bingding ng-scope">00:00</div>
@@ -159,7 +160,7 @@
                                 <!-- 发送中图标 -->
                                 <img src="../public/images/loding.gif" alt="正在发送..." class="ico_loading ng-hide">
                                 <!-- 发送失败图标 -->
-                                <i class="ico_fail web_wechat_message_fail" title="重新发送"></i>
+                                <i class="ico_fail web_wechat_message_fail" title="对方已接收"></i>
                               </div>
                             </div>
                           </div>
@@ -168,22 +169,87 @@
                     </div>
                   </div>
                 </div>
-                <!-- 单个结束 -->
+                <!-- 我方单个结束 -->
+                <!--  -->
+                <div class="ng-scope">
+                  <div class="clearfix">
+                    <div style="overflow: hidden">
+                      <!-- 消息内容开始 -->
+                      <div class="message ng-scope you">
+                        <!-- 时间部分 -->
+                        <div class="message_system ng-scope">
+                          <!-- 时间 -->
+                          <div class="content ng-bingding ng-scope">00:00</div>
+                        </div>
+                        <!-- 头像部分 -->
+                        <img src="" alt="" class="avatar" title="">
+                        <!-- 消息主体 -->
+                        <div class="content">
+                          <div class="bubble js_message_bubble ng-scope bubble_default left">
+                            <!-- 内容主体 -->
+                            <div class="bubble_cont ng-scope">
+                              <div class="plain">
+                                <pre class="js_message_plain ng-binging">想说啥就说啥</pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+
                 <div class="bottom-placeholder ng-scope"></div>
                 <div id="prerender" style="visibility: hidden; position: absolute; width: 100%; top: 333px; height: 0; padding: 0 19px; box-sizing: border-box; margin-left: -19px; overflow: hidden;"></div>
                 <!-- 没有消息时的显示界面 -->
-                <div class="message_empty ng-scope">
-                  <i class="web_wechat_nomes_icon ng-hide"></i>
+                <div class="message_empty ng-scope ng-hide">
+                  <i class="web_wechat_nomes_icon"></i>
                   <p class='ng-hide'>还没有开始聊天</p>
-                  <i class=''>未选择连天对象</i>
+                  <p class=''>未选择连天对象</p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="box_ft ng-scope">
+            <!-- 表情,文件部分 -->
+            <div class="toolbar" id="tool_var">
+              <a href="javascript:;" class="web_wechat_face" title='表情'></a>
+            </div>
+            <!-- 输入框部分 -->
+            <div class="content ng-isolate-scope">
+              <pre contenteditable="true" draggable='false' id="editArea" class='flex edit_area ng-isolate-scope ng-valid ng-dirty'></pre>
+              <span class="caret_pos_helper" id="caretPosHelper"></span>
+            </div>
+            <!-- 发送部分 -->
+            <div class="action">
+              <span class="desc ng-scope">摁下Ctr + Enter发送</span>
+              <a class="btn btn_send" href='javascript:;' ng-click='send()'>发送</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script>
+    var str =
+      "<div class='ng-scope'><div class='clearfix'><div style='overflow: hidden'><!-- 消息内容开始 --><div class='message ng-scope me'><!-- 头像部分 --><img src='' alt='' class='avatar' title=''><!-- 消息主体 --><div class='content'><div class='bubble js_message_bubble ng-scope bubble_primary right'><!-- 内容主体 --><div class='bubble_cont ng-scope'><div class='plain'><pre class='js_message_plain ng-binging'>说点啥??</pre><!-- 发送中图标 --><img src='../public/images/loding.gif' alt='正在发送...' class='ico_loading ng-hide'><!-- 发送失败图标 --><i class='ico_fail web_wechat_message_fail' title='对方已接收'></i></div></div></div></div></div></div></div></div>";
+
+    function message() {
+      console.log($('#editArea')[0].innerHTML);
+      $('#chat_content').append(str);
+      $('.scroll-content').scrollTop($('#chat_content')[0].scrollHeight);
+      // console.log($('#chat_content')[0].scrollHeight);
+    }
+    $('.btn_send').click(function() {
+      message();
+    });
+    $('#editArea').keydown(function() {
+      if (event.ctrlKey && event.keyCode == 13) {
+        message();
+      }
+    });
+  </script>
 </body>
 
 </html>
