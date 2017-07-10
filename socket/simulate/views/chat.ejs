@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>WeChat</title>
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+
+<body>
+  <div class='main'>
+    <!-- 主体部分 -->
+    <div class="main_inner">
+      <!-- 侧边栏好友 -->
+      <div class="panel">
+        <!-- 侧边栏头部分 -->
+        <div class="header">
+          <!-- 头像部分 -->
+          <div class="avatar">
+            <!-- 用户头像 -->
+            <img src="./images/header/lol/0.png" alt="" class="img" id='userImg'>
+          </div>
+          <!-- 侧边ID -->
+          <div class="info">
+            <h3 class="nickname">
+              <!-- ID -->
+              <span class="display_name ng-binding">昵称获取出错</span>
+              <!-- 菜单栏 -->
+              <a href="javascript:;" class="opt">
+                <i class="web_wechat_add"></i>
+              </a>
+            </h3>
+          </div>
+        </div>
+        <div class="search_bar">
+          <!-- search 图标 -->
+          <i class="web_wechat_search"></i>
+          <!-- 搜索框 -->
+          <input type="text" class="frm_search ng-isolate-scope ng-gristine ng-valid" placeholder='搜索'>
+        </div>
+        <!-- 分组部分 -->
+        <div class="tab">
+          <div class="tab_item">
+            <a href="javascript:;" class="chat" title="聊天">
+              <i class="web_wechat_tab_chat web_wechat_tab_chat_hl"></i>
+            </a>
+          </div>
+          <div class="tab_item ng-scope">
+            <a href="javascript:;" class="chat" title='推送'>
+              <i class="web_wechat_tab_public"></i>
+            </a>
+          </div>
+          <div class="tab_item no_extra">
+            <a href="javascript:;" class="chat" title='通讯录'>
+              <i class="web_wechat_tab_friends"></i>
+            </a>
+          </div>
+        </div>
+        <div class="nav_view ng-scope" style='width: auto'>
+          <div class="scroll-wrapper chat_list scrollbar-dynamic" style='position: relative'>
+            <div class="chat_list scrollbar-dynamic scroll-content scroll-scroll_visibile" style='margin-bottom: 0px; margin-right: 0px; height: 576px;'>
+              <!-- 加载消息部分 -->
+              <p class="ico_loading ng-hide">
+                <img src="../images/chat/loding.gif" alt=""> 正在获取最近聊天记录...
+              </p>
+              <!-- 消息部分 -->
+              <div class="ng-scope">
+                <div class="ng-scope">
+                  <!-- 单个消息 -->
+                  <div id='big_Boom' class="chat_item slide-left ng-scope top">
+                    <!-- 右侧提示图标 -->
+                    <div class="ext">
+                      <p id='time_item' class="attr ng-binding"></p>
+                      <!-- 消息免打扰 图标 -->
+                      <p class="arrt ng-scope no_time">
+                        <i class="web_wechat_no-remind ng-hide"></i>
+                      </p>
+                    </div>
+                    <!-- 好友头像 -->
+                    <div class="avatar">
+                      <img src="./images/chat/h5-4.png" alt="" class="img">
+                      <i class="icon web_wechat_reddot_middle ng-binding ng-scope ng-hide"></i>
+                    </div>
+                    <!-- 好友昵称部分 -->
+                    <div class="info">
+                      <h3 class="nickname">
+                        <span class="nickname_text ng-binding">Richard领导下的H5-四班</span>
+                      </h3>
+                      <p class="msg ng-scope">
+                        <span id='item_chat' class="ng-bingding"></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- 滚动条消除 - x -->
+                <div class="scroll-element scroll-x scroll-scrolly_visible">
+                  <div class="scroll-element_corner"></div>
+                  <div class="scroll-arrow scroll-arrow_less"></div>
+                  <div class="scroll-arrow scroll-arrow_more"></div>
+                  <div class="scroll-element_outer">
+                    <div class="scroll-element_size"></div>
+                    <div class="scroll-element_inner-wrapper">
+                      <div class="scroll-element_inner scroll-element_track">
+                        <div class="scroll-element_inner-bottom"></div>
+                      </div>
+                    </div>
+                    <div class="scroll-bar" style='width: 89px;'>
+                      <div class="scroll-bar_body">
+                        <div class="scroll-bar_body-inner"></div>
+                      </div>
+                      <div class="scroll-bar_bottom"></div>
+                      <div class="scroll-bar_center"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mmpop_system_menu" class='mmpop ng-scope system_menu ng-hide'>
+          <ul class="dropdown_menu">
+            <li class='last_child' title='退出'>
+              <a href="javascript:;"><i class='menuicon_chat'></i>退出登录</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 右边聊天框 -->
+      <!-- style='height: 100%' -->
+      <div class="chat_body ng-scope">
+        <div id="chatArea" class='box chat ng-scope'>
+          <!-- 聊天框头部 -->
+          <div class="box_hd">
+            <!-- 展开的人员表 -->
+            <div id="chatRoomMembersWrap"></div>
+            <!-- 聊天框头部 -->
+            <div class="title_wrap">
+              <div class="title poi">
+                <a href="" class="title_name ng-binding">Richard领导下的H5-四班</a>
+                <i class="web_wechat_down_icon"></i>
+              </div>
+            </div>
+          </div>
+          <!-- 聊天框部分 -->
+          <div class="scroll-wrapper box_bd chat_bd scrollbar-dynamic">
+            <div class="box_bd chat_bd scrollbar-dynamic scroll-content" style="margin-bottom: 0px; margin-right: 0px; height: 499px;">
+              <div class="ng-scope" id='chat_content'>
+                <div class="top-placeholder ng-scope" style='height: 0px'></div>
+
+
+
+                <!-- 聊天框结束 -->
+                <div class="bottom-placeholder ng-scope"></div>
+                <div id="prerender" style="visibility: hidden; position: absolute; width: 100%; top: 333px; height: 0; padding: 0 19px; box-sizing: border-box; margin-left: -19px; overflow: hidden;"></div>
+                <!-- 没有消息时的显示界面 -->
+                <div class="message_empty ng-scope">
+                  <i class="web_wechat_nomes_icon"></i>
+                  <p class=''>还没有开始聊天</p>
+                  <p class='ng-hide'>未选择连天对象</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box_ft ng-scope">
+            <!-- 表情,文件部分 -->
+            <div class="toolbar" id="tool_var">
+              <a href="javascript:;" class="web_wechat_face" title='表情'></a>
+            </div>
+            <!-- 输入框部分 -->
+            <div class="content ng-isolate-scope">
+              <pre contenteditable="true" draggable='false' id="editArea" class='flex edit_area ng-isolate-scope ng-valid ng-dirty'></pre>
+              <span class="caret_pos_helper" id="caretPosHelper"></span>
+            </div>
+            <!-- 发送部分 -->
+            <div class="action">
+              <span class="desc ng-scope">摁下Ctr + Enter发送</span>
+              <a class="btn btn_send" href='javascript:;' ng-click='send()'>发送</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js'></script>
+  <script src='./javascripts/cookie.js'></script>
+  <script src='/javascripts/chatRoom.js'></script>
+  <script>
+    $('document').ready(function() {
+
+      handler();
+      // 选中某个消息
+      $('#big_Boom').click(function() {
+        // 更改颜色
+        $('.ext').addClass('focus-c');
+        $('.msg').addClass('focus-c');
+
+        $('.main_inner').css('min-width', '560px');
+        $('.panel').css({
+          'float': 'left',
+          'border-top-right-radius': '0',
+          'border-bottom-right-radius': '0'
+        });
+        $('.chat_body').css('height', '100%');
+        por = false;
+        $('.icon').addClass('ng-hide');
+      });
+
+      // 折叠某个消息
+      $('#big_Boom').dblclick(function() {
+        if ($('.ext').hasClass('focus-c')) {
+          $('.ext').removeClass('focus-c');
+          $('.msg').removeClass('focus-c');
+          // console.log();
+          $('.main_inner').css('min-width', '280px');
+          $('.panel').css({
+            'float': 'none',
+            'border-top-right-radius': '5px',
+            'border-bottom-right-radius': '5px'
+          });
+          $('.chat_body').css('height', '0');
+          por = true;
+          msg_num = 0;
+        }
+      });
+
+
+      var hover = false;
+      // 退出面板
+      $('.opt').focusin(function() {
+        $('#mmpop_system_menu').toggleClass('ng-hide');
+      }).focusout(function() {
+        if (!hover) {
+          $('#mmpop_system_menu').toggleClass('ng-hide');
+        }
+      });
+
+      $('.dropdown_menu').mouseenter(function() {
+        hover = true;
+      }).mouseleave(function() {
+        hover = false;
+      });
+
+      // 退出按钮
+      $('.last_child').click(function() {
+        // http://192.168.1.34:3000/
+        location.pathname = '/';
+        // 清除cookie
+        delAllCookie();
+        console.log(1);
+      });
+
+      $('#userImg').click(function() {
+        var i = confirm("是否结束聊天更换头像?");
+        if (i == true) {
+          location.pathname = '/user';
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

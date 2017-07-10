@@ -1,0 +1,31 @@
+#!/usr/bin/nodejs
+var debug = require('debug')('my-application');
+var app = require('../app');
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket) {
+
+  socket.on('ferret', function(data, callbake) {
+
+    // console.log(data);
+    // 向其他人广播
+    socket.broadcast.emit('broadcast', data);
+    // socket.emit('message', data);
+    // 反馈收到消息
+    callbake();
+  });
+
+  socket.on('userInfor', function(data) {
+    console.log(data);
+    socket.broadcast.emit('broadcast_Infor', data);
+  });
+});
+
+
+app.set('port', process.env.PORT || 3000);
+
+var server = http.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet icon" href="file:///home/wds/study/WDS-html/html/day18/image/icon/favicon.ico">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/stylesheets/zhuce.css">
+  <title>注册</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="content container in">
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">登录</button>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          密码错误
+        </div>
+      </div>
+    </div> -->
+    <div id="login" class='login'>
+      <!-- <img class='log' src="https://github.com/gurenyigu/nodejs/blob/master/Node/http/images/lol-logo.png?raw=true" alt="" width='290'> -->
+      <img class='log' src="./images/other/lol-logo.png" alt="" width='290'>
+
+      <div class="web_login">
+        <!-- <div class="bg-gradient"></div> -->
+        <form action="/user" method='POST'>
+          <ul class="g_list">
+            <li class="g_u">
+              <div class="del_touch"></div>
+              <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
+              <!-- autofocus (页面加载完成, 自动获得焦点) -->
+              <!-- required (鼠标悬停提示填写字段) -->
+              <input type="text" autocomplete='on' name='user' class='inputstyle user' required placeholder="用户名">
+            </li>
+            <div class="err" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text'></span>
+              <!-- <span class="glyphicon"></span> -->
+            </div>
+            <li class="g_p">
+              <div class="del_touch"></div>
+              <input type="password" placeholder='密码' name='pwd' class='inputstyle pwd' maxlength='16' required>
+            </li>
+            <div class="err_p" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text_p'></span>
+            </div>
+            <li class="g_p">
+              <div class="del_touch"></div>
+              <input type="password" placeholder='再次输入密码' name='pwd_two' class='inputstyle try_pwd' maxlength='16' required>
+            </li>
+            <div class="err_p_t" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text_p_t'></span>
+            </div>
+          </ul>
+          <!-- 记住登录状态 -->
+          <label for="" class="auto_login">
+          自动登录
+        </label>
+          <!-- 登录按钮 -->
+          <button class='go'>注册</button>
+        </form>
+        <!-- 忘记密码 / 注册 -->
+        <div class="wz clearfix">
+          <!-- <span ></span> -->
+          <a href="" class="getpw">忘记密码?</a>
+          <!-- <span ></span> -->
+          <a href="javascript:;" class="newuser">已有帐号密码</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='./javascripts/cookie.js'></script>
+  <script>
+    $(document).ready(function() {
+
+      $('.newuser').click(function() {
+        // http://192.168.1.34:3000/
+        location.pathname = '/';
+      });
+
+      localStorage.setItem('autoLogin', false);
+
+      var verify = false;
+
+      /* 表单校验  点击登录设置cookie */
+      var user_text;
+      var passwd_text;
+      var passwd_two;
+
+      $('form').submit(function() {
+        if (user_text && passwd_text && passwd_two) {
+          // console.log('ok!');
+          setCookie();
+          alert('注册成功!');
+        } else {
+          // console.log('no!');
+          return false;
+        }
+      });
+
+
+      $('.user').focusout(function() {
+        user_text = false;
+        let value = $(this).val();
+
+        if (value == '') {
+          $('.err_text').html('用户名不能为空!');
+          $('.err').show();
+        } else if (/\s+/.test(value)) {
+          $('.err_text').html('用户名不能存在空格!');
+          $('.err').show();
+        } else if (value.length < 5 && /[\u0000-\u00FF]/.test(value)) {
+          $('.err_text').html('用户名必须大于5位!');
+          $('.err').show();
+        } else {
+
+          // AJAX 请求 判断用户名是否存在
+
+          $.ajax({
+            // async: false,
+            url: "/verify",
+            method: "post",
+            data: {
+              user: value
+            }
+          }).done(function(data, textStatus, jqXHR) {
+            // 得到后端判断结果
+            console.log(data);
+            // console.log(textStatus);
+            if (data == true) {
+              $('.err_text').html('此用户名已被占用!');
+              $('.err').show();
+            } else {
+              $('.err').hide();
+              user_text = true;
+            }
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('判断失败!');
+          });
+
+        }
+
+      });
+
+      $('.pwd').focusout(function() {
+        passwd_text = false;
+        let value = $(this).val();
+        if (value == '') {
+          $('.err_text_p').html('密码不能为空!');
+          $('.err_p').show();
+        } else if (/\s+/.test(value)) {
+          $('.err_text_p').html('密码中不能存在空格!');
+          $('.err_p').show();
+        } else if (value.length < 8) {
+          $('.err_text_p').html('密码必须大于8位小于16位!');
+          $('.err_p').show();
+        } else {
+          $('.err_p').hide();
+          // console.log(value.length);
+          passwd_text = true;
+        }
+
+        // 防止输入完 下面, 改上面
+        if (verify) {
+          let valueNext = $('.try_pwd').val();
+          if (value === valueNext) {
+            $('.err_p_t').hide();
+            passwd_two = true;
+          } else {
+            passwd_two = false;
+            $('.err_text_p_t').html('两次输入密码不一致!');
+            $('.err_p_t').show();
+          }
+        }
+      });
+
+
+      $('.try_pwd').focusout(function() {
+        verify = true;
+        let value = $('.pwd').val();
+        let valueNext = $(this).val();
+        if (value !== valueNext) {
+          $('.err_text_p_t').html('两次输入密码不一致!');
+          $('.err_p_t').show();
+          passwd_two = false;
+        } else {
+          passwd_two = true;
+          $('.err_p_t').hide();
+        }
+      });
+
+      /* 自动登录选择模块 */
+      $('.auto_login').click(function() {
+        $(this).toggleClass('ok');
+        auto_Login();
+        // console.log(localStorage.getItem('autoLogin'));
+      });
+
+    });
+  </script>
+</body>
+
+</html>
