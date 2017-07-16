@@ -65,6 +65,15 @@
               <span class="glyphicon glyphicon-remove"></span>
               <span class='err_text_p_t'></span>
             </div>
+            <!-- 密码找回 -->
+            <li class="tell">
+              <div class="del_touch"></div>
+              <input type="password" placeholder='手机号' name='phone' class='inputstyle try_tell' maxlength='11' required>
+            </li>
+            <div class="err_tell" style='display: none'>
+              <span class="glyphicon glyphicon-remove"></span>
+              <span class='err_text_tell'></span>
+            </div>
           </ul>
           <!-- 记住登录状态 -->
           <label for="" class="auto_login">
@@ -76,7 +85,7 @@
         <!-- 忘记密码 / 注册 -->
         <div class="wz clearfix">
           <!-- <span ></span> -->
-          <a href="" class="getpw">忘记密码?</a>
+          <a href="javascript:;" class="getpw">忘记密码?</a>
           <!-- <span ></span> -->
           <a href="javascript:;" class="newuser">已有帐号密码</a>
         </div>
@@ -93,6 +102,10 @@
         location.pathname = '/';
       });
 
+      $('.getpw').click(function() {
+        location.pathname = '/zhaohui';
+      });
+
       localStorage.setItem('autoLogin', false);
 
       var verify = false;
@@ -101,9 +114,10 @@
       var user_text;
       var passwd_text;
       var passwd_two;
+      var tell;
 
       $('form').submit(function() {
-        if (user_text && passwd_text && passwd_two) {
+        if (user_text && passwd_text && passwd_two && tell) {
           // console.log('ok!');
           setCookie();
           alert('注册成功!');
@@ -201,6 +215,37 @@
         } else {
           passwd_two = true;
           $('.err_p_t').hide();
+        }
+      });
+
+      // 手机号验证
+      $('.try_tell').focusout(function() {
+        tell = false;
+        let value = $(this).val();
+        if (/^1(3|4|5|7|8)\d{9}$/.test(value)) {
+          $.ajax({
+            url: '/tell_phone',
+            method: 'post',
+            data: {
+              phone: value
+            }
+          }).done(function(data, textStatus, jqXHR) {
+            if (data == true) {
+              $('.err_tell').hide();
+              tell = true;
+              console.log('未重复');
+            } else {
+              $('.err_text_tell').html('手机号重复注册!');
+              $('.err_tell').show();
+              console.log('重复电话');
+            }
+            console.log(data);
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('phone请求失败!');
+          });
+        } else {
+          $('.err_text_tell').html('手机号输入有误! 请重新输入...');
+          $('.err_tell').show();
         }
       });
 

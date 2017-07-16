@@ -36,7 +36,8 @@ app.use('/chat', chat);
 // 定义链接数据库全局属性
 global.mongoClient = require('mongodb').MongoClient;
 // 定义数据库地址, 全局属性
-global.dbUrl = 'mongodb://127.0.0.1:27017/manage';
+// global.dbUrl = 'mongodb://127.0.0.1:27017/manage';
+global.dbUrl = 'mongodb://wudo:123456@ds163360.mlab.com:63360/first';
 
 // 数据库 插入 操作
 

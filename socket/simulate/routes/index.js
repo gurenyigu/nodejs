@@ -8,6 +8,10 @@ router.get('/', function(req, res) {
   res.render('index', {});
 });
 
+router.get('/zhaohui', function(req, res) {
+  res.render('zhaohui', {});
+});
+
 // 用户名判断
 
 router.post('/verify', function(req, res, next) {
@@ -44,7 +48,7 @@ router.post('/verify_pwd', function(req, res) {
 router.post('/user', function(req, res) {
   console.log(req.body); // { user: 'fsdafsdaf', pwd: [ '12345678w', '12345678w' ] }
   var data = req.body;
-  console.log(data.user, data.pwd);
+  console.log(data.user, data.pwd, data.phone);
 
   // 数据库插入
   mongoClient.connect(dbUrl, function(err, db) {
@@ -53,7 +57,7 @@ router.post('/user', function(req, res) {
     dbFind(db, data.user, function(boolean) {
       if (!boolean) {
 
-        dbInit(db, data.user, data.pwd, function() {
+        dbInit(db, data.user, data.pwd, data.phone, function() {
           console.log('添加完成!');
           db.close();
         });
@@ -101,13 +105,43 @@ router.post('/getHeader', function(req, res) {
 });
 
 
+router.post('/tell_phone', function(req, res) {
+  console.log(req.body);
+  var data = req.body;
+
+  mongoClient.connect(dbUrl, function(err, db) {
+    assert.equal(err, null, '数据库链接出错!');
+    console.log('连接成功!');
+    dbFTell(db, data.phone, function(boolean) {
+      db.close();
+      res.send(boolean);
+    });
+  });
+});
+
+router.post('/getpwd', function(req, res) {
+  console.log(req.body);
+  var data = req.body;
+
+  mongoClient.connect(dbUrl, function(err, db) {
+    assert.equal(err, null, '数据库出错!');
+    console.log('链接成功!');
+    dbFPwd(db, data.user, data.phone, function(pwd) {
+      db.close();
+      console.log(pwd);
+      res.send(pwd);
+    });
+  });
+});
+
 /*  数据库函数   */
 
 // 增
-function dbInit(db, user, pwd, callbake) {
+function dbInit(db, user, pwd, phone, callbake) {
   db.collection('chat').insertOne({
     'user': user,
-    'password': pwd
+    'password': pwd,
+    'phone': phone
   }, function(err, results) {
     assert.equal(err, null, '添加数据出错!');
     // console.log(results);
@@ -188,6 +222,42 @@ function dbFHeader(db, data, callbake) {
       return callbake(id);
     }
   });
+}
+
+// 检查电话是否重复
+function dbFTell(db, phone, callbake) {
+  var cursor = db.collection('chat').find({
+    'phone': phone
+  });
+  var boolean = true;
+  cursor.each(function(err, doc) {
+    assert.equal(err, null, '数据库查找出错!');
+    if (doc !== null) {
+      boolean = false;
+    } else {
+      console.log('没有数据啦!');
+      return callbake(boolean);
+    }
+  });
+}
+
+// 找回密码
+function dbFPwd(db, user, phone, callbake) {
+  var cursor = db.collection('chat').find({
+    'user': user,
+    'phone': phone
+  });
+  var pwd;
+  cursor.each(function(err, doc) {
+    assert.equal(err, null, '数据库查找出错!');
+    if (doc !== null) {
+      pwd = doc.password;
+    } else {
+      console.log('没有数据啦!');
+      return callbake(pwd);
+    }
+  });
+
 }
 
 module.exports = router;

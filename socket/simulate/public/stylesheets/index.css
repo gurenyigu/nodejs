@@ -177,7 +177,7 @@ body {
   display: block;
 }
 
-.err, .err_p {
+.err, .err_p, .err_tell {
   background-color: #eee;
   /*font-size: 17px;*/
   color: rgb(255, 91, 91);

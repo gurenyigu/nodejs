@@ -12,7 +12,7 @@
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="/stylesheets/index.css">
-  <title>登录</title>
+  <title>找回密码</title>
   <style>
 
   </style>
@@ -35,40 +35,42 @@
 
       <div class="web_login">
         <!-- <div class="bg-gradient"></div> -->
-        <form action="/chat" method='POST'>
-          <ul class="g_list">
-            <li class="g_u">
-              <div class="del_touch"></div>
-              <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
-              <!-- autofocus (页面加载完成, 自动获得焦点) -->
-              <!-- required (鼠标悬停提示填写字段) -->
-              <input type="text" autocomplete='on' name='user' class='inputstyle user' required placeholder="用户名">
-            </li>
-            <div class="err" style='display: none'>
-              <span class="glyphicon glyphicon-remove"></span>
-              <span class='err_text'></span>
-              <!-- <span class="glyphicon"></span> -->
-            </div>
-            <li class="g_p">
-              <div class="del_touch"></div>
-              <input type="password" placeholder='密码' name='pwd' class='inputstyle pwd' maxlength='16' required>
-            </li>
-            <div class="err_p" style='display: none'>
-              <span class="glyphicon glyphicon-remove"></span>
-              <span class='err_text_p'></span>
-            </div>
-          </ul>
-          <!-- 记住登录状态 -->
-          <label for="" class="auto_login">
+        <!-- <form action="/getpwd" method='POST'> -->
+        <ul class="g_list">
+          <li class="g_u">
+            <div class="del_touch"></div>
+            <!-- autocomplete(是否开启历史记录补全, 默认on, 开启) -->
+            <!-- autofocus (页面加载完成, 自动获得焦点) -->
+            <!-- required (鼠标悬停提示填写字段) -->
+            <input type="text" autocomplete='on' name='user' class='inputstyle user' required placeholder="您的用户名">
+          </li>
+          <div class="err" style='display: none'>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class='err_text'></span>
+            <!-- <span class="glyphicon"></span> -->
+          </div>
+
+          <li class="tell">
+            <div class="del_touch"></div>
+            <input type="password" placeholder='已注册手机号' name='phone' class='inputstyle try_tell' maxlength='11' required>
+          </li>
+          <div class="err_tell" style='display: none'>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class='err_text_tell'></span>
+          </div>
+          <span class="pwd" style='display: none'></span>
+        </ul>
+        <!-- 记住登录状态 -->
+        <!-- <label for="" class="auto_login">
           自动登录
-        </label>
-          <!-- 登录按钮 -->
-          <button class='go'>登录</button>
-        </form>
+        </label> -->
+        <!-- 登录按钮 -->
+        <button class='go'>找回密码</button>
+        <!-- </form> -->
         <!-- 忘记密码 / 注册 -->
         <div class="wz clearfix">
           <!-- <span ></span> -->
-          <a href="javascript:;" class="getpw">忘记密码?</a>
+          <a href="javascript:;" class="getpw">直接登录?</a>
           <!-- <span ></span> -->
           <a href="javascript:;" class="newuser">注册新用户</a>
         </div>
@@ -79,31 +81,19 @@
   <script>
     $(document).ready(function() {
 
+      localStorage.setItem('autoLogin', false);
       // 转跳
+
+      $('.getpw').click(function() {
+        location.pathname = '/';
+      });
       $('.newuser').click(function() {
         // http://192.168.1.34:3000/zc
         location.pathname = '/zc';
       });
 
-      $('.getpw').click(function() {
-        location.pathname = '/zhaohui';
-      });
-
       /* 自动登录 */
       $('.user').val('');
-      if (localStorage.getItem('autoLogin') == 'true' && cookies) {
-        let select = confirm('检测到用户信息, 进行自动登录?');
-        if (select == true) {
-          let value = getCookie();
-          $('.user').val(value[0]);
-          $('.pwd').val(value[1]);
-          $('.auto_login').toggleClass('ok');
-          user_text = true;
-          passwd_text = true;
-        } else {
-          localStorage.setItem('autoLogin', false);
-        }
-      }
 
       /* 自动登录选择模块 */
       $('.auto_login').click(function() {
@@ -111,16 +101,33 @@
         auto_Login();
         // console.log(localStorage.getItem('autoLogin'));
       });
+
+
+
       /* 表单校验  点击登录设置cookie */
       var user_text;
-      var passwd_text;
-      $('form').submit(function() {
-        if (user_text && passwd_text) {
-          setCookie();
-          return true;
-        } else {
-          return false;
-        }
+      var tell_text;
+
+      $('.go').click(function() {
+        if (user_text && tell_text) {
+          var user = $('.user').val();
+          var tell = $('.try_tell').val();
+
+          $.ajax({
+            url: '/getpwd',
+            method: 'post',
+            data: {
+              user: user,
+              phone: tell
+            }
+          }).done(function(data, textStatus, jqXHR) {
+            console.log(data);
+            alert('您的密码为: ' + data + ' 请牢记!');
+            location.pathname = '/';
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('提交数据失败.');
+          });
+        } else {}
       });
 
 
@@ -159,53 +166,40 @@
             console.log('用户名检测失败!');
           });
 
-
         }
       });
 
-      $('.pwd').focusout(function() {
-        passwd_text = false;
+      // 手机号验证
+      $('.try_tell').focusout(function() {
+        tell = false;
         let value = $(this).val();
-        if (value == '') {
-          $('.err_text_p').html('密码不能为空!');
-          $('.err_p').show();
-        } else if (/\s+/.test(value)) {
-          $('.err_text_p').html('密码中不能存在空格!');
-          $('.err_p').show();
-        } else if (value.length < 8) {
-          $('.err_text_p').html('密码必须大于8位小于16位!');
-          $('.err_p').show();
+        if (/^1(3|4|5|7|8)\d{9}$/.test(value)) {
+          $.ajax({
+            url: '/tell_phone',
+            method: 'post',
+            data: {
+              phone: value
+            }
+          }).done(function(data, textStatus, jqXHR) {
+            if (data == true) {
+              $('.err_text_tell').html('手机号不存在!');
+              $('.err_tell').show();
+              console.log('不存在');
+            } else {
+              $('.err_tell').hide();
+              tell_text = true;
+              console.log('存在电话');
+            }
+            console.log(data);
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('phone请求失败!');
+          });
         } else {
-          if (user_text) {
-            let value_user = $('.user').val();
-            // 检测数据
-            $.ajax({
-              url: '/verify_pwd',
-              method: 'post',
-              data: {
-                user: value_user,
-                password: value
-              }
-            }).done(function(data, textStatus, jqXHR) {
-              if (data !== true) {
-                $('.err_text_p').html('密码有误, 请重新输入!');
-                $('.err_p').show();
-              } else {
-                $('.err_p').hide();
-                passwd_text = true;
-              }
-            }).fail(function(jqXHR, textStatus, errTHrown) {
-              console.log('密码检测失败');
-            });
-          } else {
-            $('.err_text_p').html('请填写用户名!');
-            $('.err_p').show();
-          }
-
-          // console.log(value.length);
-
+          $('.err_text_tell').html('手机号输入有误! 请重新输入...');
+          $('.err_tell').show();
         }
       });
+
     });
   </script>
 </body>
