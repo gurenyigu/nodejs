@@ -57,8 +57,8 @@ console.log(admin.name.first + ' ' + admin.name.last);
 console.log('%s is name', admin.name.full);
 
 Blog.find({}, function(err, data) {
-  if (err) console.error(err)
-  else console.log(data)
+  if (err) console.error(err);
+  else console.log(data);
 });
 // 允许的 SchemaType 有： String Number Date  Buffer Boolean Mixed ObjectId Array
 
@@ -96,11 +96,11 @@ animalSchema.statics.findByName = function(name, cd) {
   this.find({
     name: new RegExp(name, 'i')
   }, cd);
-}
+};
 var Animal = mongoose.model('animal', animalSchema);
 //  将这个方法注册
 Animal.findByName('wangcai', function(err, animals) {
-  if (err) console.error(err)
+  if (err) console.error(err);
   else console.log('查找到： %s', animals);
   db.close();
 });
