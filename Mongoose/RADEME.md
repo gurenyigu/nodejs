@@ -4,3 +4,4 @@
 $ npm install mongoose --save
 ```
 ### 具体请看实例代码
+[Github](https://github.com/Automattic/mongoose)

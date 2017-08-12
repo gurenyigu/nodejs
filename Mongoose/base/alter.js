@@ -13,7 +13,7 @@ var Schema = mongoose.Schema;
 
 var BlogSchema = new Schema({
   name: {
-    first: String,
+    frist: String,
     last: String
   },
   age: {
@@ -24,9 +24,38 @@ var BlogSchema = new Schema({
   Alive: Boolean,
   date: {
     type: Date,
+    /* 设置默认值 */
     default: Date.now
+  },
+  edit: {
+    type: String,
+    /* 预定义修饰符, 用来去除该字段首位空格 */
+    trim: true
+  },
+  blog: {
+    type: String,
+    /* 根据给定地址进行处理(判断有无协议头, 有则不管, 无则添加) 上传到数据库的修改 */
+    set: function(url) {
+      if(!url) return url;
+      if(0 !== url.indexOf('http://') && 0 !== url.indexOf('https://'))
+      return url = 'http://' + url;
+    },
+    /* 这是对获得的数据处理,从数据库得到后的处理, 与上面设置同理, 为地址判断并添加协议 */
+    get: function(url) {
+      if(url) return url;
+      if(0 !== url.indexOf('http://') && 0 !== url.indexOf('https://'))
+      return url = 'http://' + url;
+    }
   }
 });
+
+/* 设置虚拟属性, 这种属性可以提供便利,不会对数据库进行操作, 下面进行一个简单的应用 */
+BlogSchema.full('fullName').get(function() {
+  return this.fristName + ' ' + this.lastName;
+});
+
+/* 使得到数据中存在虚拟属性, 也就是 fullName: */
+BlogSchema.set('toJSON', {getters: true, full: true});
 
 var Blog = mongoose.model('blog', BlogSchema);
 var user1 = new Blog({
@@ -37,6 +66,13 @@ var user1 = new Blog({
   age: 22,
   Alive: true
 });
+
+/* 虚拟属性显示 */
+console.log(user1.fullName);
+
+/* 设置的 BlogSchema.set */
+console.log(JSON.stringify(user1));
+
 /*
 // 保存到数据库
 user1.save(function(err, user1) {

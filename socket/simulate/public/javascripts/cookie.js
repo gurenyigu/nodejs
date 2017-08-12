@@ -1,5 +1,5 @@
-var cookies = document.cookie.length;
 
+var cookies = document.cookie.length;
 
 function auto_Login() {
   if (localStorage.getItem('autoLogin') == 'false') {

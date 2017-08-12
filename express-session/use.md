@@ -97,7 +97,7 @@ app.use(session(sess));
 
 > 默认值是函数通过 uid-safe库生成的 IDs.
 
-* 注意, 务必生成惟一的 ID 以便绘画不冲突.
+* 注意, 务必生成惟一的 ID 以便seesion不冲突.
 
 ```javascript
 app.use(session({
@@ -141,7 +141,7 @@ app.use(session({
 
 >> 默认值为 true, 但是使用默认值已经被废弃, 因为默认值将来会改变. 研究这个设置, 并选择适合的例子的内容.
 
-* 注意, 如果使用 Session 与 PassportJS 结合使用, Passport 将在 session 中添加一个空的 Passport 对象, 以提供用户验证后使用, 这将被视为对 session的修改, 从而保存绘画. 这在 PassportJS 0.3.0 中被修复.
+* 注意, 如果使用 Session 与 PassportJS 结合使用, Passport 将在 session 中添加一个空的 Passport 对象, 以提供用户验证后使用, 这将被视为对 session的修改, 从而保存session. 这在 PassportJS 0.3.0 中被修复.
 
 
 > secret(秘密)
@@ -274,3 +274,18 @@ req.session.cookie.maxAge; // => 30000
 * 这个必须的方法用于从给定 sessionID(sid) 的 store 中获取 session, 回调形如: callback(error, session)
 
 * session 参数 如果找到应该是一个 session, 如果没有找到 session(并且没有错误), 则为 null 或者 undefined, 当 error.code === 'ENOENT' 时会发生特殊情况, 形如: callback(null, null)
+
+###### store.set(sid, session, callback)
+* Required
+* 这个必须的方法用于将给定的 sessionID(sid) 和 会话(session)对象 插入 session 到store. session 在 store中设置后, 触发的函数形如: callback(error)
+
+###### store.touch(sid, session, callback)
+* Recommended
+* 这个推荐方法用于将给定session ID(sid) 和 会话(session)对象时 '联系' 一个给定的 session
+
+* 这主要用于 store 当 store 会自动删除空闲 session 时使用 并且 该方法用于在给定 session active 时向 store 发送信号.
+
+
+### 兼容 session store
+* 以下模块实现与此模块兼容的 session store. 请使用 PR 添加额外模块.
+(详情查看: )[https://www.npmjs.com/package/express-session#compatible-session-stores]

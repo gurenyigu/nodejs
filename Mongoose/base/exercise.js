@@ -69,3 +69,15 @@ One.find(function(err, User) {
   //  关闭数据库
   db.close();
 });
+
+/* 唯一索引 与 辅助索引 */
+var BookSchema = new mongoose.Schema({
+  isbn: {
+    type: String,
+    unique: true
+  },
+  name: {
+    type: String,
+    index: true
+  }
+});
